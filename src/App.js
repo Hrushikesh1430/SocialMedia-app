@@ -1,23 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import Mockman from "mockman-js";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+
+import { ProtectedRoutes } from "./Components/ProtectedRoutes/ProtectedRoutes";
+
+import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { DataContext } from "./Context/DataContext";
+import "./App.css";
 
 function App() {
+  const navigate = useNavigate();
+
+  const { setAppDevice } = useContext(DataContext);
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth >= 1024) {
+        setAppDevice(1);
+      } else {
+        setAppDevice(0);
+      }
+    }
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+  }, []);
+
+  // if (loading) {
+  //   return null;
+  // }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ScrollToTop />
+      <ToastContainer toastStyle={{ backgroundColor: "#fb5d5d;" }} />
+      {/* <Loader /> */}
+      <Routes>
+        <Route path="/mockman" element={<Mockman />} />
+
+        {/* <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} /> */}
+
+        {/* <Route path="/product/:productId" element={<Product />} /> */}
+        {/* <Route path="/wishlist" element={<ProtectedRoutes component={<WishList />} redirect={"login"} />} /> */}
+
+        {/* <Route path="*" element={<Products />} /> */}
+      </Routes>
     </div>
   );
 }
