@@ -6,7 +6,10 @@ import "./index.css";
 import App from "./App";
 
 import { makeServer } from "./server";
-import { DataContextProvider } from "./Context/DataContext";
+import { DataContextProvider, DataContext } from "./Context/DataContext";
+import { AuthContext, AuthContextProvider } from "./Context/AuthContext";
+
+export { AuthContext, DataContext };
 
 // Call make Server
 makeServer();
@@ -17,7 +20,9 @@ const Main = () => (
   <Router>
     <React.StrictMode>
       <DataContextProvider>
-        <App />
+        <AuthContextProvider>
+          <App />
+        </AuthContextProvider>
       </DataContextProvider>
     </React.StrictMode>
   </Router>

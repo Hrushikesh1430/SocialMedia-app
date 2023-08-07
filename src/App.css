@@ -1,4 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap");
+ */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
+
+@font-face {
+  font-family: "Segoe UI Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Segoe UI Regular"), url("./assets/fonts/Segoe\ UI.woff") format("woff");
+}
+@font-face {
+  font-family: "Segoe UI Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Segoe UI Bold"), url("./assets/fonts/Segoe\ UI\ Bold.woff") format("woff");
+}
 
 html,
 body,
@@ -79,7 +94,9 @@ body {
   line-height: 1;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Mulish" !important;
+  font-family: "Segoe UI Regular" !important;
+  /* font-family: "Lato", sans-serif !important; */
+  /* font-family: "Mulish" !important; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -90,4 +107,7 @@ code {
 
 * {
   box-sizing: border-box;
+}
+body {
+  background-color: rgb(0, 0, 0);
 }

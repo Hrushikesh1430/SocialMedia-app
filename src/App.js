@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { DataContext } from "./Context/DataContext";
 import "./App.css";
+import Login from "./pages/Login/Login";
 
 function App() {
   const navigate = useNavigate();
@@ -41,6 +42,7 @@ function App() {
       {/* <Loader /> */}
       <Routes>
         <Route path="/mockman" element={<Mockman />} />
+        <Route path="/login" element={<Login />} />
 
         {/* <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} /> */}

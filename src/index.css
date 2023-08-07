@@ -13,6 +13,10 @@ code {
 body {
   -webkit-tap-highlight-color: transparent; /* remove tap highlight */
 }
+:root {
+  --white-text: rgb(231, 233, 234);
+  --black-text: rgb(15, 20, 25);
+}
 
 /* :root {
   --primary-color: #fb5d5d;
