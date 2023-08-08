@@ -59,7 +59,8 @@
 .buttonWrapper {
   grid-area: f;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 12px;
 }
 .alreadyWrapper {
@@ -101,11 +102,24 @@
   display: flex;
   flex-direction: column;
 }
+.tnc {
+  display: block;
+  color: rgb(113, 118, 123);
+  line-height: 12px;
+  font-size: 11px;
+  width: 100%;
+  /* max-width: 350px; */
+  margin-bottom: 20px;
+  text-align: center;
+}
+.blue {
+  color: rgb(29, 155, 240);
+}
 .signupSubmit {
   border-color: rgba(0, 0, 0, 0);
   background-color: rgb(29, 155, 240);
   color: var(--white-text);
-  width: 350px;
+  width: 100%;
   max-width: 380px;
   border-radius: 9999px;
   height: 40px;
@@ -213,6 +227,7 @@
     row-gap: 15px;
     padding: initial;
     width: initial;
+    margin-bottom: 40px;
   }
   .signIn {
     background-color: rgba(0, 0, 0, 0);

@@ -343,7 +343,12 @@ const Signup = () => {
                   />
                   {formValues.confirmPassword.error !== "" && <span className={styles.warning}>{formValues.confirmPassword.error}</span>}
                 </div>
+
                 <div className={styles.buttonWrapper}>
+                  <span className={styles.tnc}>
+                    By signing up, you agree to the <span className={styles.blue}>Terms of Service</span> and
+                    <span className={styles.blue}> Privacy Policy</span> including <span className={styles.blue}>Cookie Use.</span>
+                  </span>
                   <button type="submit" className={styles.signupSubmit}>
                     Create Account
                   </button>

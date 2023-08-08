@@ -171,7 +171,6 @@ const Login = () => {
         <LogoX />
         <div className={styles.loginRight}>
           <span className={styles.loginTopText}>Happening Now</span>
-          {/* <span className={styles.join}>Join today.</span> */}
           <div className={styles.login}>
             <span className={styles.join}>Login to witness the modern era.</span>
 
@@ -223,10 +222,6 @@ const Login = () => {
                 <span className={styles.orText}>or</span>
                 <div className={styles.line}></div>
               </div>
-              {/* <span className={styles.account}>Dont't have an account?</span>
-              <p className={styles.signupText} onClick={() => navigate("/signup")}>
-                Signup
-              </p> */}
             </form>
           </div>
           <button className={styles.create} onClick={() => navigate("/signup")}>
@@ -236,7 +231,6 @@ const Login = () => {
             By signing up, you agree to the <span className={styles.blue}>Terms of Service</span> and
             <span className={styles.blue}> Privacy Policy</span> including <span className={styles.blue}>Cookie Use.</span>
           </span>
-          <span></span>
         </div>
       </div>
     </>
