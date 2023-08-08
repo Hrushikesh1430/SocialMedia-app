@@ -1,0 +1,78 @@
+.homeParent {
+  display: flex;
+  justify-content: center;
+}
+.sideBarParent {
+  padding: 20px 10px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 300px;
+}
+.navBar {
+  color: var(--white-text);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100%;
+  /* background-color: rgb(42, 21, 21); */
+}
+.xicon {
+  fill: var(--white-text);
+  height: 2rem;
+  padding-left: 15px;
+  margin-bottom: 20px;
+  align-self: flex-start;
+}
+.itemName {
+  font-size: 20px;
+  line-height: 22px;
+}
+.navBarItem {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 15px;
+}
+
+.home,
+.explore,
+.heart,
+.bookmark {
+  font-size: 2.1rem;
+}
+.post {
+  width: 220px;
+  border-color: rgba(0, 0, 0, 0);
+  background-color: rgb(29, 155, 240);
+  color: var(--white-text);
+  min-width: 52px;
+  min-width: 52px;
+  border-radius: 9999px;
+  height: 40px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+.homeContainer {
+  display: flex;
+  width: 100%;
+  max-width: 990px;
+  justify-content: space-between;
+  /* gap: 50px; */
+  overflow: hidden;
+}
+.homeWrapper {
+  height: 1200px;
+  border: 2px solid red;
+  width: 600px;
+}
+.homeWrapperfollow {
+  height: 1200px;
+  border: 2px solid red;
+  width: 350px;
+}
