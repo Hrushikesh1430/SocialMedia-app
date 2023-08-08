@@ -5,12 +5,11 @@ import { AuthContext } from "../..";
 import { regexCheck } from "../../Common/Utility";
 
 import styles from "./signup.module.css";
-import Navbar from "../../Components/Navbar/Navbar";
-import Footer from "../Home/Footer/Footer";
 
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 
 import { toast } from "react-toastify";
+import LogoX from "../../Components/LogoX/LogoX";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -25,7 +24,7 @@ const Signup = () => {
       value: "",
       error: "",
     },
-    email: {
+    username: {
       value: "",
       error: "",
     },
@@ -90,30 +89,20 @@ const Signup = () => {
         }));
       }
     }
-    if (fieldName === "email") {
-      let regex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
-      let emailCheck = regexCheck(value, regex);
+    if (fieldName === "username") {
       if (value === "") {
         setFormValues((formValues) => ({
           ...formValues,
-          email: {
-            ...formValues.email,
-            error: "Email address cannot be empty",
-          },
-        }));
-      } else if (!emailCheck) {
-        setFormValues((formValues) => ({
-          ...formValues,
-          email: {
-            ...formValues.email,
-            error: "Please enter a valid email address",
+          username: {
+            ...formValues.username,
+            error: "Username cannot be empty",
           },
         }));
       } else {
         setFormValues((formValues) => ({
           ...formValues,
-          email: {
-            ...formValues.email,
+          username: {
+            ...formValues.username,
             error: "",
           },
         }));
@@ -172,7 +161,7 @@ const Signup = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     let validationError = false;
-    const { firstName, lastName, email, password, confirmPassword } = formValues;
+    const { firstName, lastName, username, password, confirmPassword } = formValues;
 
     const errorFor = (validationError) => {
       for (const key in formValues) {
@@ -185,12 +174,14 @@ const Signup = () => {
 
     errorCheck("firstName", firstName.value);
     errorCheck("lastName", lastName.value);
-    errorCheck("email", email.value);
+    errorCheck("username", username.value);
     errorCheck("password", password.value);
     errorCheck("confirmPassword", confirmPassword.value);
 
     validationError =
-      firstName.value === "" || lastName.value === "" || email.value === "" || password.value === "" || confirmPassword.value === "" ? true : false;
+      firstName.value === "" || lastName.value === "" || username.value === "" || password.value === "" || confirmPassword.value === ""
+        ? true
+        : false;
 
     if (!validationError) {
       validationError = errorFor(validationError);
@@ -200,7 +191,7 @@ const Signup = () => {
       const data = {
         firstName: firstName.value,
         lastName: lastName.value,
-        email: email.value,
+        username: username.value,
         password: password.value,
       };
 
@@ -248,76 +239,78 @@ const Signup = () => {
     }
   };
 
-  if (isloggedIn) {
-    return <Navigate to="/userdetails" replace />;
-  }
+  // if (isloggedIn) {
+  //   return <Navigate to="/userdetails" replace />;
+  // }
   return (
     <>
-      <Navbar />
       <div className={styles.signupParent}>
-        <div className={styles.signup}>
-          <h3>Signup</h3>
-          <form onSubmit={submitHandler}>
-            <div className={styles.formWrapper}>
-              <div>
-                <label htmlFor="firstName">First Name</label>
-                <input
-                  type="text"
-                  className={`${styles.firstName} ${formValues.firstName.error !== "" && styles.error}`}
-                  id="firstName"
-                  name="firstName"
-                  onChange={(e) => {
-                    setFormValues((formValues) => ({
-                      ...formValues,
-                      firstName: { ...formValues.firstName, value: e.target.value },
-                    }));
-                    errorCheck("firstName", e.target.value);
-                  }}
-                />
-                {formValues.firstName.error !== "" && <span className={styles.warning}>{formValues.firstName.error}</span>}
-              </div>
-              <div>
-                <label htmlFor="lastName">Last Name</label>
-                <input
-                  type="text"
-                  className={`${styles.lastName} ${formValues.lastName.error !== "" && styles.error}`}
-                  id="lastName"
-                  name="lastName"
-                  onChange={(e) => {
-                    setFormValues((formValues) => ({
-                      ...formValues,
-                      lastName: { ...formValues.lastName, value: e.target.value },
-                    }));
-                    errorCheck("lastName", e.target.value);
-                  }}
-                />
-                {formValues.lastName.error !== "" && <span className={styles.warning}>{formValues.lastName.error}</span>}
-              </div>
-              <div>
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  className={`${styles.email} ${formValues.email.error !== "" && styles.error}`}
-                  id="signupemail"
-                  name="email"
-                  onChange={(e) => {
-                    setFormValues((formValues) => ({
-                      ...formValues,
-                      email: { ...formValues.email, value: e.target.value },
-                    }));
-                    errorCheck("email", e.target.value);
-                  }}
-                />
-                {formValues.email.error !== "" && <span className={styles.warning}>{formValues.email.error}</span>}
-              </div>
-              <div>
-                <label htmlFor="password">Password</label>
+        <LogoX />
+        <div className={styles.signupRight}>
+          <span className={styles.loginTopText}>Happening Now</span>
+          <div className={styles.signup}>
+            <span className={styles.join}>Join Today.</span>
+            <form onSubmit={submitHandler}>
+              <div className={styles.formWrapper}>
+                <div className={styles.firstNameWrapper}>
+                  <input
+                    type="text"
+                    className={`${styles.firstName} ${formValues.firstName.error !== "" && styles.error}`}
+                    id="firstName"
+                    name="firstName"
+                    placeholder="First Name"
+                    onChange={(e) => {
+                      setFormValues((formValues) => ({
+                        ...formValues,
+                        firstName: { ...formValues.firstName, value: e.target.value },
+                      }));
+                      errorCheck("firstName", e.target.value);
+                    }}
+                  />
+                  {formValues.firstName.error !== "" && <span className={styles.warning}>{formValues.firstName.error}</span>}
+                </div>
+                <div className={styles.lastNameWrapper}>
+                  <input
+                    type="text"
+                    className={`${styles.lastName} ${formValues.lastName.error !== "" && styles.error}`}
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Last Name"
+                    onChange={(e) => {
+                      setFormValues((formValues) => ({
+                        ...formValues,
+                        lastName: { ...formValues.lastName, value: e.target.value },
+                      }));
+                      errorCheck("lastName", e.target.value);
+                    }}
+                  />
+                  {formValues.lastName.error !== "" && <span className={styles.warning}>{formValues.lastName.error}</span>}
+                </div>
+                <div className={styles.usernameWrapper}>
+                  <input
+                    type="username"
+                    className={`${styles.username} ${formValues.username.error !== "" && styles.error}`}
+                    id="signupusername"
+                    name="username"
+                    placeholder="Username"
+                    onChange={(e) => {
+                      setFormValues((formValues) => ({
+                        ...formValues,
+                        username: { ...formValues.username, value: e.target.value },
+                      }));
+                      errorCheck("username", e.target.value);
+                    }}
+                  />
+                  {formValues.username.error !== "" && <span className={styles.warning}>{formValues.username.error}</span>}
+                </div>
+
                 <div className={styles.passwordWrapper}>
                   <input
                     type={passwordType}
                     className={`${styles.password} ${formValues.password.error !== "" && styles.error}`}
                     id="signupassword"
                     name="password"
+                    placeholder="Password"
                     onChange={(e) => {
                       setFormValues((formValues) => ({
                         ...formValues,
@@ -327,40 +320,45 @@ const Signup = () => {
                     }}
                   />
                   <RemoveRedEyeOutlinedIcon className={styles.eye} onClick={() => changeVisibility()} />
+                  {formValues.password.error !== "" && <span className={styles.warning}>{formValues.password.error}</span>}
                 </div>
 
-                {formValues.password.error !== "" && <span className={styles.warning}>{formValues.password.error}</span>}
+                <div className={styles.confirmpasswordWrapper}>
+                  <input
+                    type="password"
+                    className={`${styles.password} ${formValues.confirmPassword.error !== "" && styles.error}`}
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Confirm Password"
+                    onChange={(e) => {
+                      setFormValues((formValues) => ({
+                        ...formValues,
+                        confirmPassword: {
+                          ...formValues.confirmPassword,
+                          value: e.target.value,
+                        },
+                      }));
+                      errorCheck("confirmPassword", e.target.value);
+                    }}
+                  />
+                  {formValues.confirmPassword.error !== "" && <span className={styles.warning}>{formValues.confirmPassword.error}</span>}
+                </div>
+                <div className={styles.buttonWrapper}>
+                  <button type="submit" className={styles.signupSubmit}>
+                    Create Account
+                  </button>
+                </div>
+                <div className={styles.alreadyWrapper}>
+                  <span className={styles.registered}>Already a registered user?</span>
+                  <p className={styles.signIn} onClick={() => navigate("/login")}>
+                    Sign in
+                  </p>
+                </div>
               </div>
-              <div>
-                <label htmlFor="confirmPassword">Confirm Password</label>
-                <input
-                  type="password"
-                  className={`${styles.password} ${formValues.confirmPassword.error !== "" && styles.error}`}
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  onChange={(e) => {
-                    setFormValues((formValues) => ({
-                      ...formValues,
-                      confirmPassword: {
-                        ...formValues.confirmPassword,
-                        value: e.target.value,
-                      },
-                    }));
-                    errorCheck("confirmPassword", e.target.value);
-                  }}
-                />
-                {formValues.confirmPassword.error !== "" && <span className={styles.warning}>{formValues.confirmPassword.error}</span>}
-              </div>
-            </div>
-            <button type="submit">Sign up</button>
-            <span className={styles.registered}>Already a registered user?</span>
-            <p className={styles.loginText} onClick={() => navigate("/login")}>
-              Sign in
-            </p>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

@@ -4,23 +4,14 @@
   justify-content: center;
   min-height: 100vh;
 }
-.loginLeft {
-  width: 50%;
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 .loginRight {
   width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.xicon {
-  fill: var(--white-text);
-  max-height: 380px;
-}
+
 .loginTopText {
   font-size: 64px;
   color: var(--white-text);
@@ -156,26 +147,15 @@
 .orText {
   margin-bottom: 2px;
 }
-@media only screen and (min-width: 1025px) and (max-width: 1400px) {
-  /* .loginParent {
-    max-width: 960px;
-  } */
-}
+
 @media only screen and (max-width: 1024px) {
   .loginParent {
     flex-direction: column;
     align-items: initial;
     padding: 30px;
   }
-  .loginLeft {
-    width: initial;
-    margin-bottom: 40px;
-  }
   .loginRight {
     width: initial;
-  }
-  .xicon {
-    height: 3rem;
   }
   .loginTopText {
     font-size: 40px;
