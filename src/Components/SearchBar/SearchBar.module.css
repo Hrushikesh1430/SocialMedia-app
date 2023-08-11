@@ -1,0 +1,127 @@
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.searchInputWrapper {
+  width: 100%;
+}
+.searchInput {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgb(231, 233, 234);
+  background-color: rgb(32, 35, 39);
+  background-clip: padding-box;
+  border: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 9999px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  outline: none;
+}
+.searchInputWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.SearchBox {
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  z-index: 1000;
+  overflow-y: auto;
+  top: 51px;
+  max-height: 450px;
+  background-color: rgb(32, 35, 39);
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px, rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+  border-radius: 8px;
+}
+.searchInput {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.searchItem {
+  border-bottom: 1px solid hsla(216, 3%, 66%, 0.22);
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px 20px;
+  gap: 5px;
+}
+.brand {
+  color: #878787;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.searchInfo span {
+  display: block;
+}
+.searchImage {
+  width: 120px;
+  aspect-ratio: 2/3;
+}
+
+.closeSearch {
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+  border-radius: 50%;
+  top: 12px;
+  font-size: 1.6rem;
+  color: rgb(113, 118, 123);
+}
+.notFound {
+  display: block;
+  padding: 10px;
+  text-align: center;
+}
+.SearchBox::-webkit-scrollbar {
+  width: 4px;
+  background: #ffffff;
+}
+.SearchBox::-webkit-scrollbar-thumb {
+  background: linear-gradient(-155deg, #fd3d6b 0%, #fd7863 98%, #f3dfe0 100%);
+  -webkit-border-radius: 100px;
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0, 75);
+  height: 10px;
+}
+
+.SearchBox::-webkit-scrollbar-corner {
+  background: #000;
+  height: 5px;
+}
+/* @media only screen and (min-width: 1025px) and (max-width: 1400px) {
+  .searchWrapper {
+    width: 350px;
+  }
+} */
+
+/* @media only screen and (max-width: 1024px) {
+  .searchWrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .SearchBox {
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    z-index: 1000;
+    overflow-y: auto;
+    top: 40px;
+    max-height: 400px;
+  }
+} */

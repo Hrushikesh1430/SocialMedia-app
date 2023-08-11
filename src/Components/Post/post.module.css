@@ -1,0 +1,49 @@
+.postItem {
+  display: flex;
+  padding: 14px 16px;
+  gap: 20px;
+  border-bottom: 1px solid rgb(47, 51, 54);
+  margin: 0 -16px;
+}
+
+.postProfile {
+  box-shadow: rgba(255, 255, 255, 0.03) 0px 0px 2px inset;
+}
+.postProfile img {
+  width: 45px;
+  height: 45px;
+  border-radius: 9999px;
+}
+.postInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.userInfo {
+  display: flex;
+  gap: 8px;
+  font-size: 1rem;
+  align-items: center;
+}
+.profileName {
+  font-weight: 600;
+}
+.username,
+.date {
+  color: rgb(113, 118, 123);
+  font-size: 0.9rem;
+}
+.postContent {
+  margin-bottom: 2px;
+}
+.postOptions {
+  display: flex;
+  gap: 5rem;
+}
+.fav,
+.book,
+.comment,
+.share {
+  font-size: 1.3rem;
+  color: rgb(113, 118, 123);
+}

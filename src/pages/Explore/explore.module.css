@@ -1,0 +1,8 @@
+.exploreWrapper {
+  color: var(--white-text);
+}
+.pageTitle {
+  font-size: 23px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}

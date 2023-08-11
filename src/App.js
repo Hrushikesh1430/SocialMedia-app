@@ -14,6 +14,9 @@ import "./App.css";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import Home from "./pages/Home/Home";
+import BookMarks from "./pages/BookMarks/BookMarks";
+import Explore from "./pages/Explore/Explore";
+import Liked from "./pages/Liked/Liked";
 
 function App() {
   const navigate = useNavigate();
@@ -47,6 +50,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/bookmarks" element={<BookMarks />} />
+        <Route path="/explore" element={<Explore />} />
+        <Route path="/liked" element={<Liked />} />
 
         {/* <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} /> */}
