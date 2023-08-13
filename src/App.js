@@ -17,6 +17,8 @@ import Home from "./pages/Home/Home";
 import BookMarks from "./pages/BookMarks/BookMarks";
 import Explore from "./pages/Explore/Explore";
 import Liked from "./pages/Liked/Liked";
+import Profile from "./pages/Profile/Profile";
+import FollowInfo from "./pages/FollowInfo/FollowInfo";
 
 function App() {
   const navigate = useNavigate();
@@ -54,6 +56,10 @@ function App() {
         <Route path="/bookmarks" element={<BookMarks />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/liked" element={<Liked />} />
+        <Route path="/profile" element={<Profile />} />
+
+        <Route path="/following" element={<FollowInfo />} />
+        <Route path="/followers" element={<FollowInfo />} />
 
         {/* <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} /> */}

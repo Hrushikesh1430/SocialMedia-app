@@ -1,0 +1,108 @@
+.profileWrapper {
+  color: var(--white-text);
+}
+.pageTitle {
+  font-size: 23px;
+  font-weight: 700;
+  border-bottom: 1px solid rgb(47, 51, 54);
+  margin: 0 -16px;
+  padding: 0px 16px;
+  padding-bottom: 25px;
+  margin-bottom: 20px;
+}
+.postListContainer {
+  display: flex;
+  flex-direction: column;
+}
+.profile {
+  display: flex;
+  padding-bottom: 25px;
+  flex-direction: column;
+}
+.profileContainer {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.userImage img {
+  width: 90px;
+  height: 90px;
+  border-radius: 9999px;
+}
+.userFullName {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.userFollowInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.userMainname {
+  font-size: 1rem;
+  color: rgb(113, 118, 123);
+}
+.userMore {
+  display: flex;
+  margin-left: auto;
+}
+
+.userMore button {
+  width: 120px;
+  background-color: transparent;
+  color: var(--white-text);
+  border-radius: 9999px;
+  height: 35px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 20px;
+  cursor: pointer;
+  border: 1px solid rgb(83, 100, 113);
+}
+.followInfo {
+  font-size: 0.9rem;
+  display: flex;
+  gap: 20px;
+}
+.accountInfo {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgb(47, 51, 54);
+  margin: 0 -16px;
+  padding: 0 16px;
+  padding-bottom: 20px;
+}
+.otherInfo {
+  display: flex;
+  font-size: 0.9rem;
+  color: rgb(113, 118, 123);
+  margin-bottom: 10px;
+}
+.userlocation {
+  display: flex;
+  align-items: center;
+}
+.followInfo span {
+  display: inline-block;
+  color: rgb(113, 118, 123);
+}
+.followInfo .number {
+  font-weight: 700;
+  color: var(--white-text);
+  margin-right: 4px;
+}
+.location {
+  margin-left: -8px;
+}
+.followInfo div {
+  cursor: pointer;
+}
+
+.following span:hover,
+.followers span:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
