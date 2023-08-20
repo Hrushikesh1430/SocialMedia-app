@@ -1,22 +1,39 @@
 import styles from "./home.module.css";
 
-import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
-import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
-
 import Post from "../../Components/Post/Post";
 import MainContainer from "../../Components/MainContainer/MainContainer";
+import { useContext, useEffect, useState } from "react";
+import { DataContext } from "../../Context/DataContext";
+import PostInput from "../../Components/PostInput/PostInput";
 
 const Home = () => {
+  const { state, dispatch } = useContext(DataContext);
+
+  const [activeTab, setActiveTab] = useState(0);
+
+  const onChangeTab = (tab) => {
+    if (tab === "trending") {
+      dispatch({ type: "FILTER_LIKES", payLoad: "" });
+      setActiveTab(0);
+    } else {
+      setActiveTab(1);
+    }
+  };
+
+  useEffect(() => {
+    activeTab === 0 && dispatch({ type: "FILTER_LIKES", payLoad: "" });
+  }, [state.filteredPosts]);
+
   const HomeWrapper = () => {
     return (
       <>
         <div className={styles.homeTopContainer}>
           <div className={styles.pageTitle}>Home</div>
           <div className={styles.filterContainer}>
-            <div className={`${styles.trending} ${styles.active}`}>
+            <div className={`${styles.trending} ${activeTab === 0 && styles.active}`} onClick={() => onChangeTab("trending")}>
               <span>Trending</span>
             </div>
-            <div className={styles.latest}>
+            <div className={`${styles.latest} ${activeTab === 1 && styles.active}`} onClick={() => onChangeTab("latest")}>
               <span>Latest</span>
             </div>
           </div>
@@ -31,23 +48,14 @@ const Home = () => {
                 </div>
               </div>
               <div className={styles.postInput}>
-                <textarea placeholder="What is happening?"></textarea>
-                <div className={styles.uploadOptions}>
-                  <div className={styles.photoContainer}>
-                    <AddPhotoAlternateOutlinedIcon className={styles.addPhoto} />
-                    <EmojiEmotionsOutlinedIcon className={styles.emoji} />
-                  </div>
-                  <div className={styles.postButton}>
-                    <button className={styles.post}>Post</button>
-                  </div>
-                </div>
+                <PostInput />
               </div>
             </div>
           </div>
           <div className={styles.postListContainer}>
-            <Post />
-            <Post />
-            <Post />
+            {state.filteredPosts.map((item) => (
+              <Post content={item.content} username={item.username} mainName={item.mainName} id={item._id} likes={item.likes} />
+            ))}
           </div>
         </div>
       </>

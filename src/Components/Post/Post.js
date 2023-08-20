@@ -1,11 +1,59 @@
 import styles from "./post.module.css";
 
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
-import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import ShareIcon from "@mui/icons-material/Share";
+import { useContext, useState } from "react";
+import { DataContext } from "../../Context/DataContext";
+import { AuthContext } from "../../Context/AuthContext";
 
-const Post = () => {
+const Post = ({ content, username, mainName, id, likes }) => {
+  const { state, dispatch } = useContext(DataContext);
+
+  const [loading, setLoading] = useState(false);
+
+  const { userToken, user } = useContext(AuthContext);
+  const likePostHandler = async (id, likes) => {
+    setLoading(true);
+    const likeStatus = likes.likedBy.find((item) => item.username === user.username);
+    console.log(likeStatus);
+    // const dislikeStatus = likes.dislikedBy.find((item) => item._id === user.id);
+
+    // const post = {
+    //   content: postContent.text.value,
+    //   mainName: `${user.firstName} ${user.lastName}`,
+    // };
+    const url = likeStatus ? `/api/posts/dislike/${id}` : `/api/posts/like/${id}`;
+    const config = {
+      method: "POST",
+      headers: {
+        authorization: userToken,
+      },
+      body: {},
+    };
+    try {
+      const response = await fetch(url, config);
+      const data = await response.json();
+
+      console.log(data);
+
+      dispatch({ type: "UPDATE_POSTS", payLoad: data.posts });
+
+      // toast.success(`Added to Wishlist`, {
+      //   position: "bottom-right",
+      //   autoClose: 1000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   theme: "light",
+      // });
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <>
       <div className={styles.postItem}>
@@ -14,24 +62,28 @@ const Post = () => {
         </div>
         <div className={styles.postInfo}>
           <div className={styles.userInfo}>
-            <span className={styles.profileName}>Hrushikesh Tawde</span>
-            <span className={styles.username}>@Skullbjoing</span>
+            <span className={styles.profileName}>{mainName}</span>
+            <span className={styles.username}>@{username}</span>
             <span className={styles.date}>Sep 09, 2023</span>
           </div>
           <div className={styles.postContent}>
-            <span>
-              Mera juta hin japani sr pe lal topi. maagr dil hain hindustani.Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-              and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-              remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-              and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </span>
+            <span>{content}</span>
           </div>
           <div className={styles.postOptions}>
-            <FavoriteBorderOutlinedIcon className={styles.fav} />
-            <BookmarkBorderOutlinedIcon className={styles.book} />
-            <ChatBubbleOutlineRoundedIcon className={styles.comment} />
-            <ShareOutlinedIcon className={styles.share} />
+            {/* <FavoriteIcon
+              className={`${styles.fav} ${state.initialfind((wishListItem) => wishListItem._id === item._id) && styles.fill}`}
+              sx={{ stroke: wishList.find((wishListItem) => wishListItem._id === item._id) ? "transparent" : "#000000", strokeWidth: 1 }}
+            /> */}
+            <FavoriteIcon
+              className={`${styles.fav} ${likes.likedBy.find((item) => item.username === user.username) && styles.favfill} ${
+                loading && styles.disable
+              }`}
+              sx={{ stroke: likes.likedBy.find((item) => item.username === user.username) ? "transparent" : "#ffffff", strokeWidth: 1 }}
+              onClick={() => likePostHandler(id, likes)}
+            />
+            <BookmarkIcon className={`${styles.book}`} sx={{ stroke: "#ffffff", strokeWidth: 1 }} />
+            <ChatBubbleIcon className={`${styles.comment}`} sx={{ stroke: "#ffffff", strokeWidth: 1 }} />
+            <ShareIcon className={`${styles.share}`} />
           </div>
         </div>
       </div>

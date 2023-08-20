@@ -27,6 +27,7 @@
 }
 .profileName {
   font-weight: 600;
+  font-size: 0.9rem;
 }
 .username,
 .date {
@@ -44,6 +45,22 @@
 .book,
 .comment,
 .share {
+  color: transparent;
   font-size: 1.3rem;
-  color: rgb(113, 118, 123);
+  cursor: pointer;
+}
+
+.share {
+  color: #ffffff;
+}
+.favfill {
+  color: rgb(249, 24, 128);
+}
+.bookFill {
+  color: rgb(0, 186, 124);
+}
+
+.disable {
+  cursor: not-allowed;
+  pointer-events: none;
 }

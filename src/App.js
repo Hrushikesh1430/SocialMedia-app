@@ -19,11 +19,24 @@ import Explore from "./pages/Explore/Explore";
 import Liked from "./pages/Liked/Liked";
 import Profile from "./pages/Profile/Profile";
 import FollowInfo from "./pages/FollowInfo/FollowInfo";
+import { AuthContext } from "./Context/AuthContext";
 
 function App() {
   const navigate = useNavigate();
 
-  const { setAppDevice } = useContext(DataContext);
+  const { dispatch, setAppDevice } = useContext(DataContext);
+  const { checkLogin } = useContext(AuthContext);
+
+  const getPostsAPI = async () => {
+    try {
+      const response = await fetch("/api/posts");
+      const data = await response.json();
+      dispatch({ type: "INITIAL_FETCH", payLoad: data.posts });
+    } catch (e) {
+    } finally {
+      // HideLoader();
+    }
+  };
 
   useEffect(() => {
     function handleResize() {
@@ -33,7 +46,9 @@ function App() {
         setAppDevice(0);
       }
     }
+    checkLogin();
     handleResize();
+    getPostsAPI();
 
     window.addEventListener("resize", handleResize);
   }, []);

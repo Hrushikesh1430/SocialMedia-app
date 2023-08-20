@@ -16,7 +16,6 @@
 }
 .profile {
   display: flex;
-  padding-bottom: 25px;
   flex-direction: column;
 }
 .profileContainer {

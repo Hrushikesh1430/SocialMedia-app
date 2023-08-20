@@ -4,7 +4,7 @@
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(91, 112, 131, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +15,7 @@
   position: relative;
   min-width: 500px;
   max-width: 500px;
-  background-color: #ffffff;
+  background-color: rgb(0, 0, 0);
   padding: 10px 20px;
   border-radius: 10px;
 }
@@ -25,13 +25,14 @@
   right: 10px;
 }
 .modalClose button {
-  color: #212529;
-  background: #ccc;
+  color: #ffffff;
+  background: transparent;
   border-color: transparent;
   border-radius: 50%;
   width: 25px;
   height: 26px;
   padding: 0;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 1024px) {

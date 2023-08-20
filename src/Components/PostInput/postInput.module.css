@@ -1,0 +1,55 @@
+textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgb(47, 51, 54);
+  height: 130px;
+  margin: 0;
+  letter-spacing: 0px;
+  padding: 12px;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--white-text);
+  background-color: transparent;
+  background-clip: padding-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  outline: none;
+  resize: none;
+  font-family: "Segoe UI Regular";
+  margin-bottom: 10px;
+}
+.uploadOptions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.photoContainer {
+  display: flex;
+  gap: 12px;
+}
+.addPhoto,
+.emoji {
+  font-size: 1.7rem;
+  color: rgb(29, 155, 240);
+}
+.post {
+  width: 80px;
+  border-color: rgba(0, 0, 0, 0);
+  background-color: rgb(29, 155, 240);
+  color: var(--white-text);
+  border-radius: 9999px;
+  height: 35px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  cursor: pointer;
+}
+.disable {
+  pointer-events: none;
+  opacity: 0.5;
+}

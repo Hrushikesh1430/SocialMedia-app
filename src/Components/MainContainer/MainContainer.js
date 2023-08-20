@@ -1,9 +1,14 @@
+import { useContext } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import SiderBar from "../SideBar/SideBar";
 
 import styles from "./mainContainer.module.css";
+import { AuthContext } from "../../Context/AuthContext";
+import { useNavigate } from "react-router";
 
 const MainContainer = (props) => {
+  const { isloggedIn, setUserToken, setUser, setIsLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
   return (
     <>
       <div className={styles.homeParent}>
@@ -13,6 +18,19 @@ const MainContainer = (props) => {
 
           <div className={styles.followContainer}>
             <div className={styles.followWrapper}>
+              <button
+                onClick={() => {
+                  localStorage.removeItem("userToken");
+                  localStorage.removeItem("loggedUser");
+                  setUserToken("");
+                  setUser({});
+                  setIsLoggedIn(false);
+
+                  navigate("/login");
+                }}
+              >
+                Logout
+              </button>
               <SearchBar />
               <div className={styles.suggestions}>
                 <span className={styles.suggestionTitle}>Who to Follow</span>

@@ -1,6 +1,6 @@
 import styles from "./customModal.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
+import CloseIcon from "@mui/icons-material/Close";
+
 export const CustomModal = (props) => {
   if (!props.modalOpen) {
     return null;
@@ -11,7 +11,7 @@ export const CustomModal = (props) => {
         <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
           <div className={styles.modalClose}>
             <button onClick={props.onClose}>
-              <FontAwesomeIcon icon={faClose} />
+              <CloseIcon />
             </button>
           </div>
           <div className={styles.modalBody}>{props.children}</div>
@@ -20,3 +20,5 @@ export const CustomModal = (props) => {
     </>
   );
 };
+
+export default CustomModal;
