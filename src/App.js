@@ -24,14 +24,46 @@ import { AuthContext } from "./Context/AuthContext";
 function App() {
   const navigate = useNavigate();
 
-  const { dispatch, setAppDevice } = useContext(DataContext);
-  const { checkLogin } = useContext(AuthContext);
+  const { dispatch, dispatchUser, setAppDevice, dispatchBook, userState } = useContext(DataContext);
+
+  const { checkLogin, userToken } = useContext(AuthContext);
 
   const getPostsAPI = async () => {
     try {
       const response = await fetch("/api/posts");
       const data = await response.json();
       dispatch({ type: "INITIAL_FETCH", payLoad: data.posts });
+    } catch (e) {
+    } finally {
+      // HideLoader();
+    }
+  };
+  const getUsersAPI = async () => {
+    try {
+      const response = await fetch("/api/users");
+      const data = await response.json();
+      dispatchUser({ type: "FETCH_USERS", payLoad: data.users });
+
+      console.log(data);
+    } catch (e) {
+    } finally {
+      // HideLoader();
+    }
+  };
+
+  const getBookMarkAPI = async () => {
+    try {
+      const url = "/api/users/bookmark/";
+      const config = {
+        method: "GET",
+        headers: {
+          authorization: userToken,
+        },
+      };
+      const response = await fetch(url, config);
+      const data = await response.json();
+
+      dispatchBook({ type: "FETCH_BOOKMARKS", payLoad: data.bookmarks });
     } catch (e) {
     } finally {
       // HideLoader();
@@ -49,9 +81,14 @@ function App() {
     checkLogin();
     handleResize();
     getPostsAPI();
+    getUsersAPI();
 
     window.addEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    userToken && getBookMarkAPI();
+  }, [userToken]);
 
   // if (loading) {
   //   return null;

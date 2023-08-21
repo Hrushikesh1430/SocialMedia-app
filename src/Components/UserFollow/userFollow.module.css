@@ -1,0 +1,44 @@
+.user {
+  display: flex;
+  gap: 20px;
+  padding: 16px 0;
+}
+.userImage img {
+  width: 45px;
+  height: 45px;
+  border-radius: 9999px;
+}
+.userFullName {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.userFollowInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.userMainname {
+  font-size: 0.8rem;
+  color: rgb(113, 118, 123);
+}
+.userFollow {
+  margin-left: auto;
+}
+.userFollow button {
+  width: 80px;
+  border-color: rgba(0, 0, 0, 0);
+  background-color: var(--white-text);
+  color: rgb(15, 20, 25);
+  border-radius: 9999px;
+  height: 30px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}

@@ -18,12 +18,14 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  width: 100%;
 }
 .userInfo {
   display: flex;
   gap: 8px;
   font-size: 1rem;
   align-items: center;
+  position: relative;
 }
 .profileName {
   font-weight: 600;
@@ -63,4 +65,35 @@
 .disable {
   cursor: not-allowed;
   pointer-events: none;
+}
+
+.userMore {
+  margin-left: auto;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+}
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0px;
+  bottom: 10px;
+  background-color: rgb(22, 24, 28);
+  z-index: 10;
+  padding: 0px 4px;
+}
+.dropdownItem {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.dropdown :first-child {
+  border-bottom: 1px solid rgb(47, 51, 54);
+}
+
+.editContainer {
+  padding: 30px 10px 10px 10px;
 }

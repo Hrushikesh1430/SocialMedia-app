@@ -2,13 +2,21 @@ import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternate
 import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
 
 import styles from "./postInput.module.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { DataContext } from "../../Context/DataContext";
 
-const PostInput = () => {
+const PostInput = ({ isEdit, postInfo }) => {
   const { state, dispatch } = useContext(DataContext);
   const { userToken, user } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (isEdit) {
+      onChangeText(postInfo.content);
+    }
+  }, []);
+
+  // console.log("postId", postId);
 
   const [postContent, setPostContent] = useState({
     text: {
@@ -20,12 +28,13 @@ const PostInput = () => {
     setPostContent((postContent) => ({ ...postContent, text: { ...postContent.text, value: value } }));
   };
 
-  const postTweet = async () => {
+  const postTweet = async (e, id = null) => {
+    e.preventDefault();
     const post = {
       content: postContent.text.value,
       mainName: `${user.firstName} ${user.lastName}`,
     };
-    const url = "/api/posts";
+    const url = isEdit ? `/api/posts/edit/${id}` : `/api/posts`;
     const config = {
       method: "POST",
       headers: {
@@ -63,8 +72,11 @@ const PostInput = () => {
           <EmojiEmotionsOutlinedIcon className={styles.emoji} />
         </div>
         <div className={styles.postButton}>
-          <button className={`${styles.post} ${postContent.text.value === "" && styles.disable}`} onClick={() => postTweet()}>
-            Post
+          <button
+            className={`${styles.post} ${postContent.text.value === "" && styles.disable}`}
+            onClick={(e) => (isEdit ? postTweet(e, postInfo.id) : postTweet(e))}
+          >
+            {isEdit ? "Edit" : "Post"}
           </button>
         </div>
       </div>

@@ -12,9 +12,13 @@ import XIcon from "../../Components/XIcon/XIcon";
 
 import styles from "./sidebar.module.css";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthContext";
 
 const SiderBar = () => {
   const navigate = useNavigate();
+
+  const { user } = useContext(AuthContext);
   return (
     <div className={styles.sideBarParent}>
       <nav className={styles.navBar}>
@@ -55,14 +59,16 @@ const SiderBar = () => {
 
         <div className={styles.user} onClick={() => navigate("/profile")}>
           <div className={styles.userImage}>
-            <img src="https://res.cloudinary.com/dtrjdcrme/image/upload/v1651473734/socialmedia/avatars/adarsh-balika_dct6gm.webp" alt="userImage" />
+            <img src={user.avatarURL} alt="userImage" />
           </div>
           <div className={styles.userFollowInfo}>
             <div className={styles.userFullName}>
-              <span>Madhavi Tawde</span>
+              <span>
+                {user.firstName} {user.lastName}
+              </span>
             </div>
             <div className={styles.userMainname}>
-              <span>@madhavit</span>
+              <span>@{user.username}</span>
             </div>
           </div>
           <div className={styles.userMore}>

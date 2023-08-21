@@ -1,14 +1,24 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import SiderBar from "../SideBar/SideBar";
 
 import styles from "./mainContainer.module.css";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router";
+import UserFollow from "../UserFollow/UserFollow";
+import { DataContext } from "../../Context/DataContext";
 
 const MainContainer = (props) => {
-  const { isloggedIn, setUserToken, setUser, setIsLoggedIn } = useContext(AuthContext);
+  const { isloggedIn, setUserToken, setUser, setIsLoggedIn, user } = useContext(AuthContext);
+
+  const { userState, dispatchUser } = useContext(DataContext);
+
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   getUsersAPI();
+  // }, []);
+
   return (
     <>
       <div className={styles.homeParent}>
@@ -35,63 +45,20 @@ const MainContainer = (props) => {
               <div className={styles.suggestions}>
                 <span className={styles.suggestionTitle}>Who to Follow</span>
                 <div className={styles.followMain}>
-                  <div className={styles.user}>
-                    <div className={styles.userImage}>
-                      <img
-                        src="https://res.cloudinary.com/dtrjdcrme/image/upload/v1651473734/socialmedia/avatars/adarsh-balika_dct6gm.webp"
-                        alt="userImage"
-                      />
-                    </div>
-                    <div className={styles.userFollowInfo}>
-                      <div className={styles.userFullName}>
-                        <span>Madhavi Tawde</span>
-                      </div>
-                      <div className={styles.userMainname}>
-                        <span>@madhavit</span>
-                      </div>
-                    </div>
-                    <div className={styles.userFollow}>
-                      <button>Follow</button>
-                    </div>
-                  </div>
-                  <div className={styles.user}>
-                    <div className={styles.userImage}>
-                      <img
-                        src="https://res.cloudinary.com/dtrjdcrme/image/upload/v1651473734/socialmedia/avatars/adarsh-balika_dct6gm.webp"
-                        alt="userImage"
-                      />
-                    </div>
-                    <div className={styles.userFollowInfo}>
-                      <div className={styles.userFullName}>
-                        <span>Madhavi Tawde</span>
-                      </div>
-                      <div className={styles.userMainname}>
-                        <span>@madhavit</span>
-                      </div>
-                    </div>
-                    <div className={styles.userFollow}>
-                      <button>Follow</button>
-                    </div>
-                  </div>
-                  <div className={styles.user}>
-                    <div className={styles.userImage}>
-                      <img
-                        src="https://res.cloudinary.com/dtrjdcrme/image/upload/v1651473734/socialmedia/avatars/adarsh-balika_dct6gm.webp"
-                        alt="userImage"
-                      />
-                    </div>
-                    <div className={styles.userFollowInfo}>
-                      <div className={styles.userFullName}>
-                        <span>Madhavi Tawde</span>
-                      </div>
-                      <div className={styles.userMainname}>
-                        <span>@madhavit</span>
-                      </div>
-                    </div>
-                    <div className={styles.userFollow}>
-                      <button>Follow</button>
-                    </div>
-                  </div>
+                  {userState.users.map(
+                    (item) =>
+                      item.username !== user.username && (
+                        <UserFollow
+                          avatarURL={item.avatarURL}
+                          firstName={item.firstName}
+                          lastName={item.lastName}
+                          username={item.username}
+                          followers={item.followers}
+                          following={item.following}
+                          id={item._id}
+                        />
+                      )
+                  )}
                 </div>
               </div>
             </div>

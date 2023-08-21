@@ -11,19 +11,25 @@ import { AuthContext } from "../../Context/AuthContext";
 import ImageUpload from "./ImageUpload";
 import CustomModal from "../../Components/CustomModal/CustomModal";
 import { EditProfile } from "./EditProfile/EditProfile";
+import PostList from "../../Components/PostList/PostList";
+import { DataContext } from "../../Context/DataContext";
 
 const Profile = () => {
   const navigate = useNavigate();
 
   const [editModal, setEditModal] = useState(false);
+  const { userState } = useContext(DataContext);
 
   const { userToken, user } = useContext(AuthContext);
+
+  // console.log(user);
+
+  const userInfo = userState.users.find((item) => user.username === item.username);
   const ProfileWrapper = () => {
     return (
       <>
         <CustomModal onClose={() => setEditModal(false)} modalOpen={editModal}>
-          <EditProfile />
-          {/* <AddressForm edit={false} addressValue={currentAddress} setAddressModal={setAddressModal} /> */}
+          <EditProfile isEdit={true} profileInfo={userInfo} setEditModal={setEditModal} />
         </CustomModal>
         <div className={styles.ProfileWrapper}>
           {/* <ImageUpload /> */}
@@ -74,11 +80,7 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <div className={styles.postListContainer}>
-            <Post />
-            <Post />
-            <Post />
-          </div>
+          <PostList />
         </div>
       </>
     );

@@ -5,9 +5,13 @@ import MainContainer from "../../Components/MainContainer/MainContainer";
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../Context/DataContext";
 import PostInput from "../../Components/PostInput/PostInput";
+import { AuthContext } from "../../Context/AuthContext";
+import PostList from "../../Components/PostList/PostList";
 
 const Home = () => {
   const { state, dispatch } = useContext(DataContext);
+
+  const { user } = useContext(AuthContext);
 
   const [activeTab, setActiveTab] = useState(0);
 
@@ -41,22 +45,15 @@ const Home = () => {
             <div className={styles.postWrapper}>
               <div className={styles.profileImage}>
                 <div className={styles.profileAvatar}>
-                  <img
-                    src="https://res.cloudinary.com/dtrjdcrme/image/upload/v1651554256/socialmedia/avatars/jane-doe_il3cvx.webp"
-                    alt="profile_image"
-                  />
+                  <img src={user.avatarURL} alt="profile_image" />
                 </div>
               </div>
               <div className={styles.postInput}>
-                <PostInput />
+                <PostInput isEdit={false} postId="" />
               </div>
             </div>
           </div>
-          <div className={styles.postListContainer}>
-            {state.filteredPosts.map((item) => (
-              <Post content={item.content} username={item.username} mainName={item.mainName} id={item._id} likes={item.likes} />
-            ))}
-          </div>
+          <PostList />
         </div>
       </>
     );
