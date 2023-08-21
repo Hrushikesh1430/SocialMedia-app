@@ -136,7 +136,7 @@ const Post = ({ content, username, mainName, id, likes, setDropDownId, dropDownI
     <>
       <CustomModal onClose={() => setEditModal(false)} modalOpen={editModal}>
         <div className={styles.editContainer}>
-          <PostInput postInfo={postInfo} isEdit={true} />
+          <PostInput postInfo={postInfo} isEdit={true} setModal={setEditModal} />
         </div>
       </CustomModal>
       <div className={styles.postItem}>

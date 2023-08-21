@@ -49,7 +49,7 @@ const Home = () => {
                 </div>
               </div>
               <div className={styles.postInput}>
-                <PostInput isEdit={false} postId="" />
+                <PostInput isEdit={false} postId="" setModal={() => false} />
               </div>
             </div>
           </div>

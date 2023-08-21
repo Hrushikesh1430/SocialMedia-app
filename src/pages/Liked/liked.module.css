@@ -9,7 +9,16 @@
   padding: 0px 16px;
   padding-bottom: 25px;
 }
-.postListContainer {
+.notFound {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
+  margin-top: 40px;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.bookmarkLogo {
+  margin-top: 20px;
+  opacity: 0.5;
 }

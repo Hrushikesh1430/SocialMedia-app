@@ -66,6 +66,7 @@ export const editUserHandler = function (schema, request) {
     }
 
     user = { ...user, ...userData, updatedAt: formatDate() };
+    console.log(user);
     this.db.users.update({ _id: user._id }, user);
     return new Response(201, {}, { user });
   } catch (error) {
@@ -130,7 +131,15 @@ export const bookmarkPostHandler = function (schema, request) {
     if (isBookmarked) {
       return new Response(400, {}, { errors: ["This Post is already bookmarked"] });
     }
-    user.bookmarks.push({ _id: post._id, username: post.username, content: post.content, createdAt: post.createdAt, updatedAt: post.updatedAt });
+
+    user.bookmarks.push({
+      _id: post._id,
+      username: post.username,
+      content: post.content,
+      createdAt: post.createdAt,
+      updatedAt: post.updatedAt,
+      likes: post.likes,
+    });
     // this.db.users.update(
     //   { _id: user._id },
     //   { ...user, updatedAt: formatDate() }

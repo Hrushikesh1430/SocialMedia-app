@@ -95,6 +95,10 @@
   margin-left: 5px;
 }
 
+.editContainer {
+  padding: 30px 10px 10px 10px;
+}
+
 @media only screen and (min-width: 1025px) and (max-width: 1430px) {
   /* .itemName {
     display: none;

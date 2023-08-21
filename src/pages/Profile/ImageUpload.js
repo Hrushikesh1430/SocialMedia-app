@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Image } from "cloudinary-react";
+import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
+import styles from "./profile.module.css";
 
-const ImageUpload = () => {
-  const [image, setImage] = useState(null);
-  const [url, setUrl] = useState("");
+const ImageUpload = ({ avatarURL, setAvatarUrl }) => {
+  // const [image, setImage] = useState(null);
+  // const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
-  const [preview, setPreview] = useState(null);
+  const inputRef = useRef(null);
+  // const [preview, setPreview] = useState(null);
 
-  const uploadImage = async () => {
+  const uploadImage = async (event) => {
     setLoading(true);
     const data = new FormData();
-    data.append("file", image);
+    data.append("file", event.target.files[0]);
     data.append("upload_preset", "avatar");
     data.append("cloud_name", "dwfusbo07");
     data.append("folder", "Cloudinary-React");
@@ -22,7 +25,7 @@ const ImageUpload = () => {
       });
       const res = await response.json();
       console.log(res);
-      setUrl(res.public_id);
+      setAvatarUrl(res.url);
       setLoading(false);
     } catch (error) {
       console.log("error", error);
@@ -31,66 +34,56 @@ const ImageUpload = () => {
   };
 
   const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    setImage(file);
-
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onload = () => {
-      setPreview(reader.result);
-    };
-  };
-
-  const handleResetClick = () => {
-    setPreview(null);
-    setImage(null);
+    // const file = event.target.files[0];
+    // setImage(file);
+    // const reader = new FileReader();
+    // reader.readAsDataURL(file);
+    // reader.onload = () => {
+    //   setPreview(reader.result);
+    // };
   };
 
   return (
-    <div className="h-screen sm:px-8 md:px-16 sm:py-8">
-      <div className="container mx-auto max-w-screen-lg h-full">
-        <header className="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
-          <p className="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
-            <span>Click on Upload a File</span>&nbsp;
-          </p>
-          <input id="hidden-input" type="file" className="hidden" onChange={handleImageChange} accept="image/*" />
-          <label htmlFor="hidden-input" className="cursor-pointer">
-            <div className="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">Upload a file</div>
-          </label>
+    <div>
+      <input id="hidden-input" type="file" className={styles.hidden} onChange={uploadImage} accept="image/*" ref={inputRef} />
+      <div className={styles.camera}>
+        <CameraAltOutlinedIcon className={styles.cameraIcon} onClick={() => inputRef.current.click()} />
+      </div>
 
-          <div className="flex justify-center items-center mt-5 mx-3 max-w-xs">
+      {/* <div className="flex justify-center items-center mt-5 mx-3 max-w-xs">
             {preview && <img src={preview} alt="preview" className="w-full" />}
-          </div>
-        </header>
-        <div className="flex justify-end pb-8 pt-6 gap-4">
-          <button
+          </div> */}
+
+      {/* <button
             onClick={uploadImage}
             className="rounded-sm px-3 py-1 bg-blue-700 hover:bg-blue-500 text-white focus:shadow-outline focus:outline-none disabled:cursor-not-allowed"
             disabled={!image}
           >
             Upload now
-          </button>
-          <button
+          </button> */}
+      {/* <button
             onClick={handleResetClick}
             className="rounded-sm px-3 py-1 bg-red-700 hover:bg-red-500 text-white focus:shadow-outline focus:outline-none"
           >
             Reset
-          </button>
+          </button> */}
+
+      {loading && (
+        <div>
+          <span>Processing...</span>
         </div>
-        {loading ? (
-          <div className="flex items-center justify-center gap-2">
-            <div className="border-t-transparent border-solid animate-spin rounded-full border-blue-400 border-4 h-6 w-6"></div>
-            <span>Processing...</span>
+      )}
+      {/* {avatarURL && (
+          <div className={styles.userImage}>
+            {
+              <img
+                src="https://res.cloudinary.com/dtrjdcrme/image/upload/v1651473734/socialmedia/avatars/adarsh-balika_dct6gm.webp"
+                alt="userImage"
+              />
+            }
+            <img src={avatarURL} alt="userImage" />
           </div>
-        ) : (
-          url && (
-            <div className="pb-8 pt-4">
-              <Image cloudName="dwfusbo07" publicId={url} />
-            </div>
-          )
-        )}
-      </div>
+        )} */}
     </div>
   );
 };

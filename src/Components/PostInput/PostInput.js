@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { DataContext } from "../../Context/DataContext";
 
-const PostInput = ({ isEdit, postInfo }) => {
+const PostInput = ({ isEdit, postInfo, setModal }) => {
   const { state, dispatch } = useContext(DataContext);
   const { userToken, user } = useContext(AuthContext);
 
@@ -59,6 +59,7 @@ const PostInput = ({ isEdit, postInfo }) => {
       // });
     } catch (e) {
     } finally {
+      setModal(false);
       // setWishButtonDisabled(false);
     }
   };

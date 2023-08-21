@@ -2,13 +2,15 @@ import { useContext, useState } from "react";
 import { DataContext } from "../../Context/DataContext";
 import Post from "../Post/Post";
 
-const PostList = () => {
-  const { state } = useContext(DataContext);
+const PostList = ({ type, posts }) => {
+  const { state, bookState } = useContext(DataContext);
   const [dropDownId, setDropDownId] = useState(null);
+
+  const postList = type === "bookmarks" ? bookState.bookmarks : type === "liked" ? posts : type === "self" ? posts : state.filteredPosts;
 
   return (
     <div>
-      {state.filteredPosts.map((item) => (
+      {postList.map((item) => (
         <Post
           content={item.content}
           username={item.username}

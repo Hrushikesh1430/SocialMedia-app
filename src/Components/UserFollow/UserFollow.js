@@ -6,7 +6,7 @@ import { AuthContext } from "../../Context/AuthContext";
 const UserFollow = ({ firstName, lastName, username, avatarURL, followers, following, id }) => {
   // console.log("followers", followers);
   const [loading, setLoading] = useState(false);
-  const { userToken, user } = useContext(AuthContext);
+  const { userToken, user, setUser } = useContext(AuthContext);
   const { dispatchUser } = useContext(DataContext);
 
   const getUsersAPI = async () => {
@@ -37,6 +37,8 @@ const UserFollow = ({ firstName, lastName, username, avatarURL, followers, follo
       const data = await response.json();
 
       console.log(data);
+
+      setUser(() => data.user);
       getUsersAPI();
 
       // dispatch({ type: "CREATE_POST", payLoad: data.posts });

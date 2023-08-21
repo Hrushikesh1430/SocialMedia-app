@@ -1,5 +1,7 @@
+import LogoX from "../../Components/LogoX/LogoX";
 import MainContainer from "../../Components/MainContainer/MainContainer";
-import Post from "../../Components/Post/Post";
+
+import PostList from "../../Components/PostList/PostList";
 
 import styles from "./explore.module.css";
 
@@ -8,11 +10,7 @@ const Explore = () => {
     return (
       <div className={styles.ExploreWrapper}>
         <div className={styles.pageTitle}>Explore</div>
-        <div className={styles.postListContainer}>
-          <Post />
-          <Post />
-          <Post />
-        </div>
+        <PostList />
       </div>
     );
   };
