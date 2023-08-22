@@ -110,6 +110,8 @@ function App() {
         <Route path="/liked" element={<Liked />} />
         <Route path="/profile" element={<Profile />} />
 
+        <Route path="/profile/:username" element={<Profile />} />
+
         <Route path="/following" element={<FollowInfo />} />
         <Route path="/followers" element={<FollowInfo />} />
 

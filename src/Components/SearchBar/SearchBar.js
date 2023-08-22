@@ -8,7 +8,7 @@ import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 import styles from "./SearchBar.module.css";
 
 const SearchBar = () => {
-  const { state, dispatch } = useContext(DataContext);
+  const { userState, dispatchUser } = useContext(DataContext);
   const [searchBoxVisible, setSearcbBoxVisible] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
@@ -17,7 +17,7 @@ const SearchBar = () => {
   const handleSearchChange = (value) => {
     const searchValue = value.trim().toLowerCase();
     searchValue.length > 0 ? setSearcbBoxVisible(true) : setSearcbBoxVisible(false);
-    // dispatch({ type: "SEARCH_FILTER", payLoad: searchValue });
+    dispatchUser({ type: "SEARCH_USERS", payLoad: searchValue });
   };
   return (
     <>
@@ -43,6 +43,36 @@ const SearchBar = () => {
 
           {searchBoxVisible && (
             <div className={styles.SearchBox}>
+              {userState.searchUsers.length > 0 ? (
+                <>
+                  {userState.searchUsers.map((item) => (
+                    <div
+                      className={styles.user}
+                      onClick={() => {
+                        setSearcbBoxVisible(false);
+                        navigate(`/profile/${item.username}`);
+                        setSearchInput("");
+                      }}
+                    >
+                      <div className={styles.userImage}>
+                        <img src={item.avatarURL} alt="userImage" />
+                      </div>
+                      <div className={styles.userFollowInfo}>
+                        <div className={styles.userFullName}>
+                          <span>
+                            {item.firstName} {item.lastName}
+                          </span>
+                        </div>
+                        <div className={styles.userMainname}>
+                          <span>@{item.username}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <span className={styles.notFound}>We couldn't find item of your choice.</span>
+              )}
               {/* {state.searchList.length > 0 ? (
                 state.searchList.map((item) => (
                   <div
@@ -61,7 +91,7 @@ const SearchBar = () => {
                   </div>
                 ))
               ) : ( */}
-              <span className={styles.notFound}>We couldn't find item of your choice.</span>
+
               {/* )} */}
             </div>
           )}

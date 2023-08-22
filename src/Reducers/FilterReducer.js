@@ -1,7 +1,7 @@
 export const InitialState = {
   initialPosts: [],
   filteredPosts: [],
-  searchList: [],
+  searchPosts: [],
 };
 
 export const PostReducer = (state, { type, payLoad }) => {
@@ -23,10 +23,10 @@ export const PostReducer = (state, { type, payLoad }) => {
         ...state,
         filteredPosts: state.initialPosts.sort((a, b) => b.likes.likeCount - a.likes.likeCount),
       };
-    case "FILTER_DATE":
+    case "FILTER_BY_DATE":
       return {
         ...state,
-        filteredPosts: payLoad,
+        filteredPosts: state.initialPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
       };
     case "UPDATE_POSTS":
       return {
@@ -34,18 +34,17 @@ export const PostReducer = (state, { type, payLoad }) => {
         initialPosts: payLoad,
         filteredPosts: payLoad,
       };
-    // case "SEARCH_FILTER":
+    // case "SEARCH_POSTS":
     //   return {
     //     ...state,
-    //     searchList:
+    //     searchPosts:
     //       payLoad.length === 0
     //         ? []
-    //         : state.intialProductList
-    //             .filter(({ brand, name }) => brand.toLowerCase().includes(payLoad) || name.toLowerCase().includes(payLoad))
-    //             .slice(0, 7),
+    //         : state.initialPosts
+    //             .filter(({ username, mainName }) => username.toLowerCase().includes(payLoad) || mainName.toLowerCase().includes(payLoad))
+    //             .slice(0, 4),
     //   };
-    // case "SET_FILTERED_PRODUCTS":
-    //   return { ...state, filteredProducts: payLoad };
+
     default:
       return state;
   }

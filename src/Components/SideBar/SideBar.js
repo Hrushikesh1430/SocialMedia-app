@@ -28,13 +28,11 @@ const SiderBar = () => {
 
   const [postModal, setPostModal] = useState(false);
 
-  console.log(userState.users);
-
-  // useEffect(() => {
-  //   if (userState.users.length > 0) {
-  //     setUserInfo(() => userState.users.find((item) => item.username === user.username));
-  //   }
-  // }, [userState.users]);
+  useEffect(() => {
+    if (userState.users.length > 0) {
+      setUserInfo(() => userState.users.find((item) => item.username === user.username));
+    }
+  }, [userState.users]);
 
   return (
     <>
@@ -71,7 +69,7 @@ const SiderBar = () => {
             </span>
             <span className={styles.itemName}>Liked posts</span>
           </div>
-          <div className={styles.navBarItem} onClick={() => navigate("/profile")}>
+          <div className={styles.navBarItem} onClick={() => navigate(`/profile/${user.username}`)}>
             <span className={styles.itemIcon}>
               <PermIdentityOutlinedIcon className={styles.heart} />
             </span>

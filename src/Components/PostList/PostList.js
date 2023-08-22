@@ -6,11 +6,11 @@ const PostList = ({ type, posts }) => {
   const { state, bookState } = useContext(DataContext);
   const [dropDownId, setDropDownId] = useState(null);
 
-  const postList = type === "bookmarks" ? bookState.bookmarks : type === "liked" ? posts : type === "self" ? posts : state.filteredPosts;
+  // const postList = type === "bookmarks" ? posts : type === "liked" ? posts : type === "self" ? posts : state.filteredPosts;
 
   return (
     <div>
-      {postList.map((item) => (
+      {posts.map((item) => (
         <Post
           content={item.content}
           username={item.username}
@@ -18,6 +18,7 @@ const PostList = ({ type, posts }) => {
           id={item._id}
           likes={item.likes}
           setDropDownId={setDropDownId}
+          createdAt={item.createdAt}
           dropDownId={dropDownId}
         />
       ))}

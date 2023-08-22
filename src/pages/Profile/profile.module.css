@@ -43,12 +43,21 @@
   font-size: 1rem;
   color: rgb(113, 118, 123);
 }
-.userMore {
+.editParent {
   display: flex;
   margin-left: auto;
+  flex-direction: column;
 }
-
-.userMore button {
+.logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 20px;
+  cursor: pointer;
+}
+.editProfile {
   width: 120px;
   background-color: transparent;
   color: var(--white-text);
@@ -60,6 +69,7 @@
   line-height: 20px;
   cursor: pointer;
   border: 1px solid rgb(83, 100, 113);
+  margin: 5px 0px 5px 0px;
 }
 .followInfo {
   font-size: 0.9rem;
@@ -124,6 +134,7 @@
 
 .camera {
   position: relative;
+  cursor: pointer;
 }
 
 .cameraIcon {
@@ -131,4 +142,18 @@
   position: absolute;
   top: -30px;
   left: 60px;
+  cursor: pointer;
+}
+.notFound {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 40px;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.bookmarkLogo {
+  margin-top: 20px;
+  opacity: 0.5;
 }

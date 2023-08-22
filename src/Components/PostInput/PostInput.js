@@ -5,6 +5,7 @@ import styles from "./postInput.module.css";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { DataContext } from "../../Context/DataContext";
+import dayjs from "dayjs";
 
 const PostInput = ({ isEdit, postInfo, setModal }) => {
   const { state, dispatch } = useContext(DataContext);
@@ -33,6 +34,7 @@ const PostInput = ({ isEdit, postInfo, setModal }) => {
     const post = {
       content: postContent.text.value,
       mainName: `${user.firstName} ${user.lastName}`,
+      createdAt: isEdit ? postInfo.createdAt : `${dayjs().toJSON()}`,
     };
     const url = isEdit ? `/api/posts/edit/${id}` : `/api/posts`;
     const config = {

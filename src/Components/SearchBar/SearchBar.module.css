@@ -44,6 +44,7 @@
   background-color: rgb(32, 35, 39);
   box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px, rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
   border-radius: 8px;
+  padding: 0px 10px;
 }
 .searchInput {
   display: flex;
@@ -101,6 +102,32 @@
   background: #000;
   height: 5px;
 }
+
+.user {
+  display: flex;
+  gap: 20px;
+  padding: 12px 0;
+  cursor: pointer;
+}
+.userImage img {
+  width: 45px;
+  height: 45px;
+  border-radius: 9999px;
+}
+.userFullName {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.userFollowInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.userMainname {
+  font-size: 0.8rem;
+  color: rgb(113, 118, 123);
+}
+
 /* @media only screen and (min-width: 1025px) and (max-width: 1400px) {
   .searchWrapper {
     width: 350px;

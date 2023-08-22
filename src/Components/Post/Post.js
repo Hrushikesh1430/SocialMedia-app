@@ -9,8 +9,9 @@ import { DataContext } from "../../Context/DataContext";
 import { AuthContext } from "../../Context/AuthContext";
 import CustomModal from "../CustomModal/CustomModal";
 import PostInput from "../PostInput/PostInput";
+import dayjs from "dayjs";
 
-const Post = ({ content, username, mainName, id, likes, setDropDownId, dropDownId }) => {
+const Post = ({ content, username, mainName, id, likes, createdAt, setDropDownId, dropDownId }) => {
   const { state, userState, bookState, dispatch, dispatchUser, dispatchBook } = useContext(DataContext);
 
   const [loading, setLoading] = useState(false);
@@ -149,7 +150,8 @@ const Post = ({ content, username, mainName, id, likes, setDropDownId, dropDownI
               {userInfo.firstName} {userInfo.lastName}
             </span>
             <span className={styles.username}>@{userInfo.username}</span>
-            <span className={styles.date}>Sep 09, 2023</span>
+
+            <span className={styles.date}>{dayjs(createdAt).format("D MMMM , YYYY")}</span>
             {user.username === userInfo.username && (
               <span className={styles.userMore} onClick={() => dropDownHandler(id)}>
                 ...

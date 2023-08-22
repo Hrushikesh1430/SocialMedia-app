@@ -3,7 +3,7 @@ import styles from "./userFollow.module.css";
 import { DataContext } from "../../Context/DataContext";
 import { AuthContext } from "../../Context/AuthContext";
 
-const UserFollow = ({ firstName, lastName, username, avatarURL, followers, following, id }) => {
+const UserFollow = ({ firstName, lastName, username, avatarURL, followers, following, id, onClick }) => {
   // console.log("followers", followers);
   const [loading, setLoading] = useState(false);
   const { userToken, user, setUser } = useContext(AuthContext);
@@ -59,7 +59,7 @@ const UserFollow = ({ firstName, lastName, username, avatarURL, followers, follo
   };
   return (
     <>
-      <div className={styles.user}>
+      <div className={styles.user} onClick={onClick}>
         <div className={styles.userImage}>
           <img src={avatarURL} alt="userImage" />
         </div>
@@ -74,7 +74,13 @@ const UserFollow = ({ firstName, lastName, username, avatarURL, followers, follo
           </div>
         </div>
         <div className={styles.userFollow}>
-          <button className={`${loading && styles.disabled}`} onClick={() => followHandler(id)}>
+          <button
+            className={`${loading && styles.disabled}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              followHandler(id);
+            }}
+          >
             {followers.find((item) => item.username === user.username) ? "Following" : "Follow"}
           </button>
         </div>

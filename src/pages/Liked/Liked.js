@@ -12,8 +12,7 @@ const Liked = () => {
   const { bookState, state } = useContext(DataContext);
 
   const { user } = useContext(AuthContext);
-  const likedPosts = state.filteredPosts.filter((item) => item.likes.likedBy.find((item) => item.username === user.username) !== undefined);
-  // const likedPosts = likePostStatus.filter((item) => item && item);
+  const likedPosts = state.initialPosts.filter((item) => item.likes.likedBy.find((item) => item.username === user.username) !== undefined);
 
   const LikedWrapper = () => {
     return (

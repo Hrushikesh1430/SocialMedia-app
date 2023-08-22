@@ -1,4 +1,5 @@
 import styles from "./home.module.css";
+import * as dayjs from "dayjs";
 
 import Post from "../../Components/Post/Post";
 import MainContainer from "../../Components/MainContainer/MainContainer";
@@ -20,13 +21,15 @@ const Home = () => {
       dispatch({ type: "FILTER_LIKES", payLoad: "" });
       setActiveTab(0);
     } else {
+      dispatch({ type: "FILTER_BY_DATE", payLoad: "" });
       setActiveTab(1);
     }
   };
 
+  console.log(dayjs().toJSON());
   useEffect(() => {
-    activeTab === 0 && dispatch({ type: "FILTER_LIKES", payLoad: "" });
-  }, [state.filteredPosts]);
+    activeTab === 0 ? dispatch({ type: "FILTER_LIKES", payLoad: "" }) : dispatch({ type: "FILTER_BY_DATE", payLoad: "" });
+  }, [state.initialPosts]);
 
   const HomeWrapper = () => {
     return (
@@ -53,7 +56,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <PostList />
+          <PostList posts={state.filteredPosts} />
         </div>
       </>
     );

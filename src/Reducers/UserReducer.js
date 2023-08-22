@@ -1,5 +1,6 @@
 export const InitialUserState = {
   users: [],
+  searchUsers: [],
 };
 
 export const UserReducer = (state, { type, payLoad }) => {
@@ -9,30 +10,19 @@ export const UserReducer = (state, { type, payLoad }) => {
         ...state,
         users: payLoad,
       };
-    // case "CREATE_POST":
-    //   return {
-    //     ...state,
-    //     initialPosts: payLoad,
-    //     filteredPosts: payLoad,
-    //   };
-    // case "FILTER_LIKES":
-    //   return {
-    //     ...state,
-    //     filteredPosts: state.initialPosts.sort((a, b) => b.likes.likeCount - a.likes.likeCount),
-    //   };
-
-    // case "SEARCH_FILTER":
-    //   return {
-    //     ...state,
-    //     searchList:
-    //       payLoad.length === 0
-    //         ? []
-    //         : state.intialProductList
-    //             .filter(({ brand, name }) => brand.toLowerCase().includes(payLoad) || name.toLowerCase().includes(payLoad))
-    //             .slice(0, 7),
-    //   };
-    // case "SET_FILTERED_PRODUCTS":
-    //   return { ...state, filteredProducts: payLoad };
+    case "SEARCH_USERS":
+      return {
+        ...state,
+        searchUsers:
+          payLoad.length === 0
+            ? []
+            : state.users
+                .filter(
+                  ({ username, firstName, lastName }) =>
+                    username.toLowerCase().includes(payLoad) || firstName.toLowerCase().includes(payLoad) || lastName.toLowerCase().includes(payLoad)
+                )
+                .slice(0, 4),
+      };
     default:
       return state;
   }

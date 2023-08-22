@@ -18,7 +18,7 @@ export const posts = [
     },
     mainName: "Hrushikesh Tawde",
     username: "skullbjoing",
-    createdAt: formatDate(),
+    createdAt: "2023-08-16T07:48:11.708Z",
     updatedAt: formatDate(),
   },
   {
@@ -32,7 +32,7 @@ export const posts = [
     },
     mainName: "Adarsh Balika",
     username: "adarshbalika",
-    createdAt: formatDate(),
+    createdAt: "2023-08-17T07:48:11.708Z",
     updatedAt: formatDate(),
   },
   {
@@ -46,7 +46,7 @@ export const posts = [
     },
     mainName: "Hrushikesh Tawde",
     username: "skullbjoing",
-    createdAt: formatDate(),
+    createdAt: "2023-08-01T10:49:06.687Z",
     updatedAt: formatDate(),
   },
   {
@@ -60,7 +60,7 @@ export const posts = [
     },
     mainName: "Adarsh Balika",
     username: "adarshbalika",
-    createdAt: formatDate(),
+    createdAt: "2023-08-20T07:48:11.708Z",
     updatedAt: formatDate(),
   },
   {
@@ -73,7 +73,7 @@ export const posts = [
     },
     mainName: "Hrushikesh Tawde",
     username: "skullbjoing",
-    createdAt: formatDate(),
+    createdAt: "2023-08-19T07:48:11.708Z",
     updatedAt: formatDate(),
   },
   {
@@ -87,7 +87,7 @@ export const posts = [
     },
     mainName: "Hrushikesh Tawde",
     username: "skullbjoing",
-    createdAt: formatDate(),
+    createdAt: "2023-08-18T07:48:11.708Z",
     updatedAt: formatDate(),
   },
 ];

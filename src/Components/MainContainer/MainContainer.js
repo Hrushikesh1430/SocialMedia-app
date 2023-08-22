@@ -28,19 +28,6 @@ const MainContainer = (props) => {
 
           <div className={styles.followContainer}>
             <div className={styles.followWrapper}>
-              <button
-                onClick={() => {
-                  localStorage.removeItem("userToken");
-                  localStorage.removeItem("loggedUser");
-                  setUserToken("");
-                  setUser({});
-                  setIsLoggedIn(false);
-
-                  navigate("/login");
-                }}
-              >
-                Logout
-              </button>
               <SearchBar />
               <div className={styles.suggestions}>
                 <span className={styles.suggestionTitle}>Who to Follow</span>
@@ -56,6 +43,7 @@ const MainContainer = (props) => {
                           followers={item.followers}
                           following={item.following}
                           id={item._id}
+                          onClick={() => navigate(`/profile/${item.username}`)}
                         />
                       )
                   )}
