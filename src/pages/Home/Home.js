@@ -35,7 +35,6 @@ const Home = () => {
     return (
       <>
         <div className={styles.homeTopContainer}>
-          <div className={styles.pageTitle}>Home</div>
           <div className={styles.filterContainer}>
             <div className={`${styles.trending} ${activeTab === 0 && styles.active}`} onClick={() => onChangeTab("trending")}>
               <span>Trending</span>
@@ -62,7 +61,7 @@ const Home = () => {
     );
   };
 
-  return <MainContainer component={<HomeWrapper />}></MainContainer>;
+  return <MainContainer component={<HomeWrapper />} title={"Home"}></MainContainer>;
 };
 
 export default Home;

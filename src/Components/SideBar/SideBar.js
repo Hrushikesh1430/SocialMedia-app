@@ -18,11 +18,13 @@ import { DataContext } from "../../Context/DataContext";
 import CustomModal from "../CustomModal/CustomModal";
 import PostInput from "../PostInput/PostInput";
 
-const SiderBar = () => {
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+
+const SiderBar = ({ toggleSidebar, setToggleSideBar }) => {
   const navigate = useNavigate();
 
   const { user } = useContext(AuthContext);
-  const { userState } = useContext(DataContext);
+  const { userState, AppDevice } = useContext(DataContext);
 
   const [userInfo, setUserInfo] = useState({});
 
@@ -34,14 +36,8 @@ const SiderBar = () => {
     }
   }, [userState.users]);
 
-  return (
-    <>
-      <CustomModal onClose={() => setPostModal(false)} modalOpen={postModal}>
-        <div className={styles.editContainer}>
-          <PostInput isEdit={false} postId="" setModal={setPostModal} />
-        </div>
-      </CustomModal>
-
+  const SideBarMain = () => {
+    return (
       <div className={styles.sideBarParent}>
         <nav className={styles.navBar}>
           <XIcon className={styles.xicon} />
@@ -81,7 +77,7 @@ const SiderBar = () => {
             </button>
           </div>
 
-          <div className={styles.user} onClick={() => navigate("/profile")}>
+          <div className={styles.user} onClick={() => navigate(`/profile/${user.username}`)}>
             <div className={styles.userImage}>
               <img src={user.avatarURL} alt="userImage" />
             </div>
@@ -101,6 +97,24 @@ const SiderBar = () => {
           </div>
         </nav>
       </div>
+    );
+  };
+
+  return (
+    <>
+      <CustomModal onClose={() => setPostModal(false)} modalOpen={postModal}>
+        <div className={styles.editContainer}>
+          <PostInput isEdit={false} postId="" setModal={setPostModal} />
+        </div>
+      </CustomModal>
+
+      {AppDevice === 1 ? (
+        <SideBarMain />
+      ) : (
+        <SwipeableDrawer anchor={"left"} open={toggleSidebar} onClose={() => setToggleSideBar(false)}>
+          <SideBarMain />
+        </SwipeableDrawer>
+      )}
     </>
   );
 };

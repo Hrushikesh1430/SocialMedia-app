@@ -12,14 +12,13 @@ const Explore = () => {
   const ExploreWrapper = () => {
     return (
       <div className={styles.ExploreWrapper}>
-        <div className={styles.pageTitle}>Explore</div>
         <PostList posts={state.initialPosts} />
       </div>
     );
   };
   return (
     <>
-      <MainContainer component={<ExploreWrapper />} />
+      <MainContainer component={<ExploreWrapper />} title={"Explore"} />
     </>
   );
 };

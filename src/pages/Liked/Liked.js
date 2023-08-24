@@ -17,7 +17,6 @@ const Liked = () => {
   const LikedWrapper = () => {
     return (
       <div className={styles.LikedWrapper}>
-        <div className={styles.pageTitle}>Liked posts</div>
         {likedPosts.length > 0 ? (
           <PostList type="liked" posts={likedPosts} />
         ) : (
@@ -33,7 +32,7 @@ const Liked = () => {
   };
   return (
     <>
-      <MainContainer component={<LikedWrapper />} />
+      <MainContainer component={<LikedWrapper />} title={"Liked posts"} />
     </>
   );
 };

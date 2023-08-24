@@ -1,8 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
 import MainContainer from "../../Components/MainContainer/MainContainer";
-import Post from "../../Components/Post/Post";
-
-import userpic from "../../assets/images/default_user.png";
 
 import styles from "./profile.module.css";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
@@ -10,7 +7,7 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
-import ImageUpload from "./ImageUpload";
+
 import CustomModal from "../../Components/CustomModal/CustomModal";
 import { EditProfile } from "./EditProfile/EditProfile";
 import PostList from "../../Components/PostList/PostList";
@@ -68,15 +65,9 @@ const Profile = () => {
         </CustomModal>
         {userInfo ? (
           <div className={styles.ProfileWrapper}>
-            {/* <ImageUpload /> */}
-            <div className={styles.pageTitle}>Profile</div>
             <div className={styles.profile}>
               <div className={styles.profileContainer}>
                 <div className={styles.userImage}>
-                  {/* <img
-                src="https://res.cloudinary.com/dtrjdcrme/image/upload/v1651473734/socialmedia/avatars/adarsh-balika_dct6gm.webp"
-                alt="userImage"
-              /> */}
                   <img src={userInfo.avatarURL} alt="userImage" />
                 </div>
                 <div className={styles.userFollowInfo}>
@@ -125,10 +116,6 @@ const Profile = () => {
                   )}
                 </div>
                 <div className={styles.followInfo}>
-                  {/* <div className={styles.posts}>
-                  <span className={styles.number}></span>
-                  <span>Posts</span>
-                </div> */}
                   <div className={styles.following} onClick={() => navigate("/following")}>
                     <span className={styles.number}>{userInfo.following.length}</span>
                     <span>Following</span>
@@ -158,14 +145,18 @@ const Profile = () => {
       </>
     );
   };
-
+  if (username === undefined) {
+    navigate("/home");
+    return null;
+  }
   if (userInfo.avatarURL === undefined) {
     navigate("/home");
     return null;
   }
+
   return (
     <>
-      <MainContainer component={<ProfileWrapper />} />
+      <MainContainer component={<ProfileWrapper />} title={"Profile"} />
     </>
   );
 };

@@ -14,7 +14,6 @@ const BookMarks = () => {
   const BookMarkWrapper = () => {
     return (
       <div className={styles.bookMarkWrapper}>
-        <div className={styles.pageTitle}>Bookmarks</div>
         {bookState.bookmarks.length > 0 ? (
           <PostList type="bookmarks" posts={bookMarkedPosts} />
         ) : (
@@ -28,7 +27,7 @@ const BookMarks = () => {
   };
   return (
     <>
-      <MainContainer component={<BookMarkWrapper />} />
+      <MainContainer component={<BookMarkWrapper />} title={"Bookmarks"} />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import SiderBar from "../SideBar/SideBar";
 
@@ -8,23 +8,29 @@ import { useNavigate } from "react-router";
 import UserFollow from "../UserFollow/UserFollow";
 import { DataContext } from "../../Context/DataContext";
 
+import MenuIcon from "@mui/icons-material/Menu";
+
 const MainContainer = (props) => {
   const { isloggedIn, setUserToken, setUser, setIsLoggedIn, user } = useContext(AuthContext);
 
-  const { userState, dispatchUser } = useContext(DataContext);
+  const { userState, dispatchUser, AppDevice } = useContext(DataContext);
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   getUsersAPI();
-  // }, []);
+  const [toggleSidebar, setToggleSideBar] = useState(false);
 
   return (
     <>
       <div className={styles.homeParent}>
-        <SiderBar />
+        <SiderBar toggleSidebar={toggleSidebar} setToggleSideBar={setToggleSideBar} />
         <div className={styles.homeContainer}>
-          <div className={styles.homeWrapper}>{props.component}</div>
+          <div className={styles.homeWrapper}>
+            <div className={styles.titlewrapper}>
+              {AppDevice === 0 && <MenuIcon onClick={() => setToggleSideBar(true)} />}
+              <span className={styles.pageTitle}>{props.title}</span>
+            </div>
+            <div className={styles.component}>{props.component}</div>
+          </div>
 
           <div className={styles.followContainer}>
             <div className={styles.followWrapper}>

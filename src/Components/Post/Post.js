@@ -151,7 +151,7 @@ const Post = ({ content, username, mainName, id, likes, createdAt, setDropDownId
             </span>
             <span className={styles.username}>@{userInfo.username}</span>
 
-            <span className={styles.date}>{dayjs(createdAt).format("D MMMM , YYYY")}</span>
+            <span className={styles.date}>{dayjs(createdAt).format("D MMM, YYYY")}</span>
             {user.username === userInfo.username && (
               <span className={styles.userMore} onClick={() => dropDownHandler(id)}>
                 ...
