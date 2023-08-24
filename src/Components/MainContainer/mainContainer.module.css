@@ -23,8 +23,6 @@
   padding-bottom: 0;
 }
 .followContainer {
-  /* border: 1px solid rgb(47, 51, 54); */
-  /* width: 350px; */
   flex: 1.2;
   padding-top: 10px;
 }
@@ -56,6 +54,9 @@
   margin-bottom: 25px;
   gap: 10px;
 }
+.searchBarParent {
+  margin-left: auto;
+}
 
 @media only screen and (min-width: 1025px) and (max-width: 1430px) {
   .homeContainer {
@@ -73,6 +74,7 @@
 @media only screen and (max-width: 1024px) {
   .homeParent {
     flex-direction: column;
+    justify-content: initial;
   }
   .homeContainer {
     display: flex;
@@ -93,10 +95,9 @@
     padding-bottom: 0;
   }
   .followContainer {
-    /* border: 1px solid rgb(47, 51, 54); */
-    /* width: 350px; */
     flex: initial;
     padding-top: 10px;
+    display: none;
   }
   .titlewrapper {
     backdrop-filter: blur(12px);
@@ -104,13 +105,20 @@
     width: 100%;
     margin: 0 -16px;
     top: 0;
-    height: 50px;
+    height: 70px;
     background-color: rgba(0, 0, 0, 0.65);
     z-index: 3;
     padding: 0 16px;
     gap: 20px;
   }
   .component {
-    margin-top: 50px;
+    margin-top: 70px;
+  }
+  .homeWrapper {
+    border: none;
+  }
+  .followWrapper {
+    position: initial;
+    margin: 0 16px;
   }
 }

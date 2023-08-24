@@ -1,5 +1,7 @@
 .bookMarkWrapper {
   color: var(--white-text);
+  display: flex;
+  flex-direction: column;
 }
 .pageTitle {
   font-size: 23px;
@@ -22,4 +24,14 @@
 .bookmarkLogo {
   margin-top: 20px;
   opacity: 0.5;
+}
+@media only screen and (max-width: 1024px) {
+  .bookmarkLogo {
+    margin-top: 20px;
+    height: 200px;
+  }
+  .notFound {
+    margin-top: 0px;
+    font-size: 1.2rem;
+  }
 }

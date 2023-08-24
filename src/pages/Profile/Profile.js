@@ -18,7 +18,8 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const [editModal, setEditModal] = useState(false);
-  const { userState, state } = useContext(DataContext);
+  const { userState, state, dispatchUser } = useContext(DataContext);
+  const [loading, setLoading] = useState(false);
 
   const { username } = useParams();
 
@@ -39,7 +40,7 @@ const Profile = () => {
     id: "",
   });
 
-  const { user, setUserToken, setUser, setIsLoggedIn } = useContext(AuthContext);
+  const { user, setUserToken, setUser, setIsLoggedIn, userToken } = useContext(AuthContext);
 
   let selfPosts = state.initialPosts.filter((item) => item.username === username);
   selfPosts = selfPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -51,6 +52,56 @@ const Profile = () => {
     setUser({});
     setIsLoggedIn(false);
     navigate("/login");
+  };
+
+  const getUsersAPI = async () => {
+    try {
+      const response = await fetch("/api/users");
+      const data = await response.json();
+      dispatchUser({ type: "FETCH_USERS", payLoad: data.users });
+
+      console.log(data);
+    } catch (e) {
+    } finally {
+      // HideLoader();
+    }
+  };
+  const followHandler = async (id, followers) => {
+    setLoading(true);
+    console.log("followers", followers);
+    const followStatus = followers.find((item) => item.username === user.username);
+    const url = followStatus ? `/api/users/unfollow/${id}` : `/api/users/follow/${id}`;
+    const config = {
+      method: "POST",
+      headers: {
+        authorization: userToken,
+      },
+      body: {},
+    };
+    try {
+      const response = await fetch(url, config);
+      const data = await response.json();
+
+      console.log(data);
+
+      setUser(() => data.user);
+      getUsersAPI();
+
+      // dispatch({ type: "CREATE_POST", payLoad: data.posts });
+
+      // toast.success(`Added to Wishlist`, {
+      //   position: "bottom-right",
+      //   autoClose: 1000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   theme: "light",
+      // });
+    } catch (e) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -80,7 +131,7 @@ const Profile = () => {
                     <span>@{userInfo.username}</span>
                   </div>
                 </div>
-                {username === user.username && (
+                {username === user.username ? (
                   <div className={styles.editParent}>
                     <button className={styles.editProfile} onClick={() => setEditModal(true)}>
                       Edit profile
@@ -89,6 +140,18 @@ const Profile = () => {
                       <LogoutOutlinedIcon className={styles.logoutIcon} />
                       <span>Logout</span>
                     </div>
+                  </div>
+                ) : (
+                  <div className={styles.userFollow}>
+                    <button
+                      className={`${loading && styles.disabled}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        followHandler(userInfo._id, userInfo.followers);
+                      }}
+                    >
+                      {userInfo.followers.find((item) => item.username === user.username) ? "Following" : "Follow"}
+                    </button>
                   </div>
                 )}
               </div>

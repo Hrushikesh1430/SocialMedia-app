@@ -157,3 +157,41 @@
   margin-top: 20px;
   opacity: 0.5;
 }
+.userFollow {
+  margin-left: auto;
+}
+.userFollow button {
+  width: 80px;
+  border-color: rgba(0, 0, 0, 0);
+  background-color: var(--white-text);
+  color: rgb(15, 20, 25);
+  border-radius: 9999px;
+  height: 30px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+@media only screen and (max-width: 1024px) {
+  .profileContainer {
+    flex-wrap: wrap;
+  }
+  .userImage {
+    flex: 1;
+  }
+  .userFollowInfo {
+    order: 1;
+  }
+  .editParent {
+    margin: initial;
+  }
+  .userFollow {
+    margin: initial;
+  }
+}

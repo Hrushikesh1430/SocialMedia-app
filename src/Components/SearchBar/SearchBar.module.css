@@ -134,21 +134,113 @@
   }
 } */
 
-/* @media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1024px) {
   .searchWrapper {
     display: flex;
     align-items: center;
     gap: 20px;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: initial;
   }
+  .searchInputWrapper {
+    width: 100%;
+  }
+  .searchInput {
+    display: inline-block;
+    width: 150px;
+    padding: 8px 12px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgb(231, 233, 234);
+    background-color: rgb(32, 35, 39);
+    background-clip: padding-box;
+    border: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 9999px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    outline: none;
+  }
+
   .SearchBox {
     width: 100%;
     position: absolute;
     left: 0px;
     z-index: 1000;
     overflow-y: auto;
-    top: 40px;
-    max-height: 400px;
+    top: 51px;
+    max-height: 450px;
+    background-color: rgb(32, 35, 39);
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px, rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+    border-radius: 8px;
+    padding: 0px 10px;
   }
-} */
+  .searchInput {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .searchItem {
+    border-bottom: 1px solid hsla(216, 3%, 66%, 0.22);
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 20px;
+    gap: 5px;
+  }
+  .brand {
+    color: #878787;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  .searchInfo span {
+    display: block;
+  }
+  .searchImage {
+    width: 120px;
+    aspect-ratio: 2/3;
+  }
+
+  .closeSearch {
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
+    border-radius: 50%;
+    top: 9px;
+    font-size: 1.6rem;
+    color: rgb(113, 118, 123);
+  }
+  .notFound {
+    display: block;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .user {
+    display: flex;
+    gap: 10px;
+    padding: 12px 0;
+    cursor: pointer;
+  }
+  .userImage img {
+    width: 45px;
+    height: 45px;
+    border-radius: 9999px;
+  }
+  .userFullName {
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+  .userFollowInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .userMainname {
+    font-size: 0.7rem;
+    color: rgb(113, 118, 123);
+  }
+}

@@ -28,6 +28,11 @@ const MainContainer = (props) => {
             <div className={styles.titlewrapper}>
               {AppDevice === 0 && <MenuIcon onClick={() => setToggleSideBar(true)} />}
               <span className={styles.pageTitle}>{props.title}</span>
+              {AppDevice === 0 && (
+                <div className={styles.searchBarParent}>
+                  <SearchBar />
+                </div>
+              )}
             </div>
             <div className={styles.component}>{props.component}</div>
           </div>
