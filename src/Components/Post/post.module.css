@@ -191,4 +191,10 @@
   .editContainer {
     padding: 30px 10px 10px 10px;
   }
+  .favfill {
+    color: rgb(249, 24, 128);
+  }
+  .bookFill {
+    color: rgb(0, 186, 124);
+  }
 }

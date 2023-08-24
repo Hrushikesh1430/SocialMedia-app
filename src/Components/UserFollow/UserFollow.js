@@ -7,7 +7,7 @@ const UserFollow = ({ firstName, lastName, username, avatarURL, followers, follo
   // console.log("followers", followers);
   const [loading, setLoading] = useState(false);
   const { userToken, user, setUser } = useContext(AuthContext);
-  const { dispatchUser } = useContext(DataContext);
+  const { dispatchUser, customToast } = useContext(DataContext);
 
   const getUsersAPI = async () => {
     try {
@@ -21,7 +21,7 @@ const UserFollow = ({ firstName, lastName, username, avatarURL, followers, follo
       // HideLoader();
     }
   };
-  const followHandler = async (id) => {
+  const followHandler = async (id, username) => {
     setLoading(true);
     const followStatus = followers.find((item) => item.username === user.username);
     const url = followStatus ? `/api/users/unfollow/${id}` : `/api/users/follow/${id}`;
@@ -35,23 +35,9 @@ const UserFollow = ({ firstName, lastName, username, avatarURL, followers, follo
     try {
       const response = await fetch(url, config);
       const data = await response.json();
-
-      console.log(data);
-
       setUser(() => data.user);
       getUsersAPI();
-
-      // dispatch({ type: "CREATE_POST", payLoad: data.posts });
-
-      // toast.success(`Added to Wishlist`, {
-      //   position: "bottom-right",
-      //   autoClose: 1000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   theme: "light",
-      // });
+      followStatus ? customToast(`Unfollowed ${username}`, "SUCCESS") : customToast(`Followed ${username}`, "SUCCESS");
     } catch (e) {
     } finally {
       setLoading(false);
@@ -78,7 +64,7 @@ const UserFollow = ({ firstName, lastName, username, avatarURL, followers, follo
             className={`${loading && styles.disabled}`}
             onClick={(e) => {
               e.stopPropagation();
-              followHandler(id);
+              followHandler(id, username);
             }}
           >
             {followers.find((item) => item.username === user.username) ? "Following" : "Follow"}

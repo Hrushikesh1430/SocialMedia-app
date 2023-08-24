@@ -8,7 +8,7 @@ import { DataContext } from "../../Context/DataContext";
 import dayjs from "dayjs";
 
 const PostInput = ({ isEdit, postInfo, setModal }) => {
-  const { state, dispatch } = useContext(DataContext);
+  const { state, dispatch, customToast } = useContext(DataContext);
   const { userToken, user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -49,16 +49,7 @@ const PostInput = ({ isEdit, postInfo, setModal }) => {
       const data = await response.json();
 
       dispatch({ type: "CREATE_POST", payLoad: data.posts });
-
-      // toast.success(`Added to Wishlist`, {
-      //   position: "bottom-right",
-      //   autoClose: 1000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   theme: "light",
-      // });
+      isEdit ? customToast("Post Edited", "SUCCESS") : customToast("Post successfully created", "SUCCESS");
     } catch (e) {
     } finally {
       setModal(false);

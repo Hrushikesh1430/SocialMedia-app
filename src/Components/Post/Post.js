@@ -12,7 +12,7 @@ import PostInput from "../PostInput/PostInput";
 import dayjs from "dayjs";
 
 const Post = ({ content, username, mainName, id, likes, createdAt, setDropDownId, dropDownId }) => {
-  const { state, userState, bookState, dispatch, dispatchUser, dispatchBook } = useContext(DataContext);
+  const { state, userState, bookState, dispatch, dispatchUser, dispatchBook, customToast } = useContext(DataContext);
 
   const [loading, setLoading] = useState(false);
 
@@ -43,20 +43,8 @@ const Post = ({ content, username, mainName, id, likes, createdAt, setDropDownId
     try {
       const response = await fetch(url, config);
       const data = await response.json();
-
-      console.log(data);
-
       dispatch({ type: "UPDATE_POSTS", payLoad: data.posts });
-
-      // toast.success(`Added to Wishlist`, {
-      //   position: "bottom-right",
-      //   autoClose: 1000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   theme: "light",
-      // });
+      likeStatus ? customToast("Removed from liked posts", "SUCCESS") : customToast("Added to liked posts", "SUCCESS");
     } catch (e) {
     } finally {
       setLoading(false);
@@ -76,17 +64,8 @@ const Post = ({ content, username, mainName, id, likes, createdAt, setDropDownId
     try {
       const response = await fetch(url, config);
       const data = await response.json();
-      console.log(data);
       dispatchBook({ type: "FETCH_BOOKMARKS", payLoad: data.bookmarks });
-      // toast.success(`Added to Wishlist`, {
-      //   position: "bottom-right",
-      //   autoClose: 1000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   theme: "light",
-      // });
+      bookmarkStatus ? customToast("Post removed from Bookmarks", "SUCCESS") : customToast("Post added to Bookmarks", "SUCCESS");
     } catch (e) {
     } finally {
       setLoading(false);
@@ -114,16 +93,7 @@ const Post = ({ content, username, mainName, id, likes, createdAt, setDropDownId
       console.log(data);
 
       dispatch({ type: "CREATE_POST", payLoad: data.posts });
-
-      // toast.success(`Added to Wishlist`, {
-      //   position: "bottom-right",
-      //   autoClose: 1000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   theme: "light",
-      // });
+      customToast("Post Deleted", "SUCCESS");
     } catch (e) {
       console.log(e);
     } finally {

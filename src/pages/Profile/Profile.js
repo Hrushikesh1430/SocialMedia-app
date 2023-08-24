@@ -86,18 +86,6 @@ const Profile = () => {
 
       setUser(() => data.user);
       getUsersAPI();
-
-      // dispatch({ type: "CREATE_POST", payLoad: data.posts });
-
-      // toast.success(`Added to Wishlist`, {
-      //   position: "bottom-right",
-      //   autoClose: 1000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   theme: "light",
-      // });
     } catch (e) {
     } finally {
       setLoading(false);

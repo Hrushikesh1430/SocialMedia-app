@@ -11,7 +11,7 @@ import ImageUpload from "../ImageUpload";
 
 export const EditProfile = ({ isEdit, profileInfo, setEditModal }) => {
   const { user, userToken, setUser } = useContext(AuthContext);
-  const { dispatchUser } = useContext(DataContext);
+  const { dispatchUser, customToast } = useContext(DataContext);
 
   const [avatarURL, setAvatarUrl] = useState("");
   const { imageURL, setImageURL } = useState(profileInfo.avatarURL);
@@ -143,10 +143,9 @@ export const EditProfile = ({ isEdit, profileInfo, setEditModal }) => {
       try {
         const response = await fetch(url, config);
         const data = await response.json();
-
-        console.log("edit", data);
         setUser(data.user);
         setEditModal(false);
+        customToast("Profile Edited", "SUCCESS");
       } catch (error) {
       } finally {
         getUsersAPI();
