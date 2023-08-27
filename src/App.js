@@ -24,18 +24,19 @@ import { AuthContext } from "./Context/AuthContext";
 function App() {
   const navigate = useNavigate();
 
-  const { dispatch, dispatchUser, setAppDevice, dispatchBook, userState } = useContext(DataContext);
+  const { dispatch, dispatchUser, setAppDevice, dispatchBook, userState, loader, setLoader } = useContext(DataContext);
 
   const { checkLogin, userToken } = useContext(AuthContext);
 
   const getPostsAPI = async () => {
     try {
+      setLoader(true);
       const response = await fetch("/api/posts");
       const data = await response.json();
       dispatch({ type: "INITIAL_FETCH", payLoad: data.posts });
     } catch (e) {
     } finally {
-      // HideLoader();
+      setLoader(false);
     }
   };
   const getUsersAPI = async () => {

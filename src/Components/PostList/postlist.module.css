@@ -1,0 +1,9 @@
+.postListParent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.loaderStyle {
+  margin-top: 150px;
+}

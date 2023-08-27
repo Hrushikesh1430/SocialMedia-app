@@ -13,12 +13,15 @@ import { EditProfile } from "./EditProfile/EditProfile";
 import PostList from "../../Components/PostList/PostList";
 import { DataContext } from "../../Context/DataContext";
 import LogoX from "../../Components/LogoX/LogoX";
+import { CustomLoader } from "../../Components/CustomLoader/CustomLoader";
 
 const Profile = () => {
   const navigate = useNavigate();
 
   const [editModal, setEditModal] = useState(false);
-  const { userState, state, dispatchUser } = useContext(DataContext);
+
+  const [loader, setLoader] = useState(true);
+  const { userState, state, dispatchUser, customToast } = useContext(DataContext);
   const [loading, setLoading] = useState(false);
 
   const { username } = useParams();
@@ -51,6 +54,7 @@ const Profile = () => {
     setUserToken("");
     setUser({});
     setIsLoggedIn(false);
+    customToast("Logged out", "SUCCESS");
     navigate("/login");
   };
 
@@ -93,6 +97,12 @@ const Profile = () => {
   };
 
   useEffect(() => {
+    if (userInfo === undefined || userInfo.avatarURL !== "") {
+      setLoader(false);
+    }
+  }, [userInfo]);
+
+  useEffect(() => {
     userState.users.length > 0 && setUserInfo(() => userState.users.find((item) => username === item.username));
   }, [userState.users, username]);
 
@@ -102,82 +112,94 @@ const Profile = () => {
         <CustomModal onClose={() => setEditModal(false)} modalOpen={editModal}>
           <EditProfile isEdit={true} profileInfo={user} setEditModal={setEditModal} />
         </CustomModal>
+
         {userInfo ? (
           <div className={styles.ProfileWrapper}>
-            <div className={styles.profile}>
-              <div className={styles.profileContainer}>
-                <div className={styles.userImage}>
-                  <img src={userInfo.avatarURL} alt="userImage" />
-                </div>
-                <div className={styles.userFollowInfo}>
-                  <div className={styles.userFullName}>
-                    <span>
-                      {userInfo.firstName} {userInfo.lastName}
-                    </span>
+            {!loader ? (
+              <>
+                <div className={styles.profile}>
+                  <div className={styles.profileContainer}>
+                    <div className={styles.userImage}>
+                      <img src={userInfo.avatarURL} alt="userImage" />
+                    </div>
+                    <div className={styles.userFollowInfo}>
+                      <div className={styles.userFullName}>
+                        <span>
+                          {userInfo.firstName} {userInfo.lastName}
+                        </span>
+                      </div>
+                      <div className={styles.userMainname}>
+                        <span>@{userInfo.username}</span>
+                      </div>
+                    </div>
+                    {username === user.username ? (
+                      <div className={styles.editParent}>
+                        <button className={styles.editProfile} onClick={() => setEditModal(true)}>
+                          Edit profile
+                        </button>
+                        <div className={styles.logout} onClick={() => logoutHandler()}>
+                          <LogoutOutlinedIcon className={styles.logoutIcon} />
+                          <span>Logout</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className={styles.userFollow}>
+                        <button
+                          className={`${loading && styles.disabled}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            followHandler(userInfo._id, userInfo.followers);
+                          }}
+                        >
+                          {userInfo.followers.find((item) => item.username === user.username) ? "Following" : "Follow"}
+                        </button>
+                      </div>
+                    )}
                   </div>
-                  <div className={styles.userMainname}>
-                    <span>@{userInfo.username}</span>
-                  </div>
-                </div>
-                {username === user.username ? (
-                  <div className={styles.editParent}>
-                    <button className={styles.editProfile} onClick={() => setEditModal(true)}>
-                      Edit profile
-                    </button>
-                    <div className={styles.logout} onClick={() => logoutHandler()}>
-                      <LogoutOutlinedIcon className={styles.logoutIcon} />
-                      <span>Logout</span>
+                  <div className={styles.accountInfo}>
+                    <div className={styles.otherInfo}>
+                      <div className={styles.userlocation}>
+                        <LocationOnOutlinedIcon className={styles.location} />
+                        <span>Mumbai Maharashtra</span>
+                      </div>
+                    </div>
+                    <div className={styles.bio}>
+                      {userInfo.bio !== "" && (
+                        <div>
+                          <span>Bio : </span>
+                          <span>{userInfo.bio}</span>
+                        </div>
+                      )}
+                      {userInfo.profileURL !== "" && (
+                        <div>
+                          <span>Portfolio URL : </span>
+                          <span>
+                            <a href={userInfo.profileURL}>{userInfo.profileURL}</a>
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <div className={styles.followInfo}>
+                      {/* <div className={styles.following} onClick={() => navigate("/following/userInfo._id")}> */}
+                      <div className={styles.following}>
+                        <span className={styles.number}>{userInfo.following.length}</span>
+                        <span>Following</span>
+                      </div>
+                      {/* <div className={styles.followers} onClick={() => navigate("/followers/userInfo._id")}> */}
+                      <div className={styles.followers} onClick={() => navigate("/following/userInfo._id")}>
+                        <span className={styles.number}>{userInfo.followers.length}</span>
+                        <span>Followers</span>
+                      </div>
                     </div>
                   </div>
-                ) : (
-                  <div className={styles.userFollow}>
-                    <button
-                      className={`${loading && styles.disabled}`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        followHandler(userInfo._id, userInfo.followers);
-                      }}
-                    >
-                      {userInfo.followers.find((item) => item.username === user.username) ? "Following" : "Follow"}
-                    </button>
-                  </div>
-                )}
+                </div>
+              </>
+            ) : (
+              <div className={styles.loaderParent}>
+                <CustomLoader width={30} height={30} loading={loader} className={styles.loaderStyle} />
               </div>
-              <div className={styles.accountInfo}>
-                <div className={styles.otherInfo}>
-                  <div className={styles.userlocation}>
-                    <LocationOnOutlinedIcon className={styles.location} />
-                    <span>Mumbai Maharashtra</span>
-                  </div>
-                </div>
-                <div className={styles.bio}>
-                  {userInfo.bio !== "" && (
-                    <div>
-                      <span>Bio : </span>
-                      <span>{userInfo.bio}</span>
-                    </div>
-                  )}
-                  {userInfo.profileURL !== "" && (
-                    <div>
-                      <span>Portfolio URL : </span>
-                      <span>
-                        <a href={userInfo.profileURL}>{userInfo.profileURL}</a>
-                      </span>
-                    </div>
-                  )}
-                </div>
-                <div className={styles.followInfo}>
-                  <div className={styles.following} onClick={() => navigate("/following")}>
-                    <span className={styles.number}>{userInfo.following.length}</span>
-                    <span>Following</span>
-                  </div>
-                  <div className={styles.followers} onClick={() => navigate("/followers")}>
-                    <span className={styles.number}>{userInfo.followers.length}</span>
-                    <span>Followers</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            )}
+
             {selfPosts.length > 0 ? (
               <PostList posts={selfPosts} type="self" />
             ) : (

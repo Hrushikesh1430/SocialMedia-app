@@ -8,9 +8,10 @@ import { DataContext } from "../../Context/DataContext";
 import PostInput from "../../Components/PostInput/PostInput";
 import { AuthContext } from "../../Context/AuthContext";
 import PostList from "../../Components/PostList/PostList";
+import { CustomLoader } from "../../Components/CustomLoader/CustomLoader";
 
 const Home = () => {
-  const { state, dispatch } = useContext(DataContext);
+  const { state, dispatch, loader } = useContext(DataContext);
 
   const { user } = useContext(AuthContext);
 
@@ -35,26 +36,30 @@ const Home = () => {
     return (
       <>
         <div className={styles.homeTopContainer}>
-          <div className={styles.filterContainer}>
-            <div className={`${styles.trending} ${activeTab === 0 && styles.active}`} onClick={() => onChangeTab("trending")}>
-              <span>Trending</span>
+          <>
+            <div className={styles.filterContainer}>
+              <div className={`${styles.trending} ${activeTab === 0 && styles.active}`} onClick={() => onChangeTab("trending")}>
+                <span>Trending</span>
+              </div>
+              <div className={`${styles.latest} ${activeTab === 1 && styles.active}`} onClick={() => onChangeTab("latest")}>
+                <span>Latest</span>
+              </div>
             </div>
-            <div className={`${styles.latest} ${activeTab === 1 && styles.active}`} onClick={() => onChangeTab("latest")}>
-              <span>Latest</span>
-            </div>
-          </div>
-          <div className={styles.postContainer}>
-            <div className={styles.postWrapper}>
-              <div className={styles.profileImage}>
-                <div className={styles.profileAvatar}>
-                  <img src={user.avatarURL} alt="profile_image" />
+            <div className={styles.postContainer}>
+              <div className={styles.postWrapper}>
+                <div className={styles.profileImage}>
+                  <div className={styles.profileAvatar}>
+                    <img src={user.avatarURL} alt="profile_image" />
+                  </div>
+                </div>
+
+                <div className={styles.postInput}>
+                  <PostInput isEdit={false} postId="" setModal={() => false} />
                 </div>
               </div>
-              <div className={styles.postInput}>
-                <PostInput isEdit={false} postId="" setModal={() => false} />
-              </div>
             </div>
-          </div>
+          </>
+
           <PostList posts={state.filteredPosts} />
         </div>
       </>

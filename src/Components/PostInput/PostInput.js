@@ -6,9 +6,10 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { DataContext } from "../../Context/DataContext";
 import dayjs from "dayjs";
+import { CustomLoader } from "../CustomLoader/CustomLoader";
 
 const PostInput = ({ isEdit, postInfo, setModal }) => {
-  const { state, dispatch, customToast } = useContext(DataContext);
+  const { state, dispatch, customToast, loader } = useContext(DataContext);
   const { userToken, user } = useContext(AuthContext);
 
   useEffect(() => {

@@ -178,6 +178,13 @@
   cursor: not-allowed;
   pointer-events: none;
 }
+
+.loaderParent {
+  min-height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 @media only screen and (max-width: 1024px) {
   .profileContainer {
     flex-wrap: wrap;
