@@ -45,7 +45,7 @@ function App() {
       const data = await response.json();
       dispatchUser({ type: "FETCH_USERS", payLoad: data.users });
 
-      console.log(data);
+      console.log("userdata", data);
     } catch (e) {
     } finally {
       // HideLoader();
@@ -63,6 +63,8 @@ function App() {
       };
       const response = await fetch(url, config);
       const data = await response.json();
+
+      // console.log("api", data);
 
       dispatchBook({ type: "FETCH_BOOKMARKS", payLoad: data.bookmarks });
     } catch (e) {

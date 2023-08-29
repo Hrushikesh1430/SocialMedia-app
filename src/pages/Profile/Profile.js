@@ -103,6 +103,7 @@ const Profile = () => {
   }, [userInfo]);
 
   useEffect(() => {
+    console.log("users", userState.users, "username", username);
     userState.users.length > 0 && setUserInfo(() => userState.users.find((item) => username === item.username));
   }, [userState.users, username]);
 
@@ -222,6 +223,7 @@ const Profile = () => {
     navigate("/home");
     return null;
   }
+
   if (userInfo.avatarURL === undefined) {
     navigate("/home");
     return null;

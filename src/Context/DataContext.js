@@ -26,7 +26,7 @@ export const DataContextProvider = ({ children }) => {
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
-          theme: "light",
+          theme: "dark",
         });
         break;
       }

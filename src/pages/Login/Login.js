@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
-import { AuthContext } from "../..";
+import { AuthContext, DataContext } from "../..";
 
 import styles from "./login.module.css";
 import { regexCheck } from "../../Common/Utility";
@@ -14,7 +14,7 @@ import LogoX from "../../Components/LogoX/LogoX";
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const { dispatchUser } = useContext(DataContext);
   const { isloggedIn, setUserToken, setIsLoggedIn, setUser } = useContext(AuthContext);
   const location = useLocation();
 
@@ -78,6 +78,21 @@ const Login = () => {
     }
   };
 
+  const getUsersAPI = async () => {
+    try {
+      const response = await fetch("/api/users");
+      const data = await response.json();
+      dispatchUser({ type: "FETCH_USERS", payLoad: data.users });
+
+      console.log("userdata", data);
+    } catch (e) {
+    } finally {
+      // HideLoader();
+    }
+  };
+
+  // const addUser = ()
+
   const submitLoginHandler = async (e) => {
     e.preventDefault();
     let validationError = false;
@@ -122,9 +137,12 @@ const Login = () => {
         if (!errors) {
           localStorage.setItem("userToken", encodedToken);
           localStorage.setItem("loggedUser", JSON.stringify(foundUser));
+
           setUserToken(encodedToken);
           setIsLoggedIn(true);
           setUser(foundUser);
+
+          getUsersAPI();
 
           toast.success("Successfully logged In", {
             position: "bottom-right",
@@ -133,7 +151,7 @@ const Login = () => {
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
-            theme: "light",
+            theme: "dark",
           });
           navigate(location?.state?.from?.pathname);
         } else {
@@ -151,7 +169,7 @@ const Login = () => {
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
-            theme: "light",
+            theme: "dark",
           });
         }
       } catch (error) {

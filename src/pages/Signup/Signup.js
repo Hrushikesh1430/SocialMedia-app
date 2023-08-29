@@ -191,8 +191,11 @@ const Signup = () => {
       const data = {
         firstName: firstName.value,
         lastName: lastName.value,
+        avatarURL: "https://res.cloudinary.com/dwfusbo07/image/upload/f_auto,q_auto/v1/Cloudinary-React/opmhoapvufd0tcswyjaf",
         username: username.value,
         password: password.value,
+        bio: "",
+        profileURL: "",
       };
 
       const url = "/api/auth/signup";
@@ -209,7 +212,8 @@ const Signup = () => {
         const response = await fetch(url, config);
         const data = await response.json();
         const { errors } = data;
-        console.log(data);
+        console.log("user signup", data);
+
         if (!errors) {
           // localStorage.setItem("userToken", encodedToken);
           toast.success(`User Created successfully`, {
@@ -219,9 +223,9 @@ const Signup = () => {
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
-            theme: "light",
+            theme: "dark",
           });
-          // navigate("/login");
+          navigate("/login");
         } else {
           toast.error(`User Already Exists. Please try with some other credentials`, {
             position: "bottom-right",
@@ -230,7 +234,7 @@ const Signup = () => {
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
-            theme: "light",
+            theme: "dark",
           });
         }
       } catch (error) {
@@ -239,9 +243,9 @@ const Signup = () => {
     }
   };
 
-  // if (isloggedIn) {
-  //   return <Navigate to="/userdetails" replace />;
-  // }
+  if (isloggedIn) {
+    return <Navigate to="/" replace />;
+  }
   return (
     <>
       <div className={styles.signupParent}>
