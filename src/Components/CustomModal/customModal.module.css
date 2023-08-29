@@ -6,10 +6,11 @@
   bottom: 0;
   background-color: rgba(91, 112, 131, 0.4);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   overflow: hidden;
   z-index: 1200;
+  padding-top: 30px;
 }
 .modalContent {
   position: relative;

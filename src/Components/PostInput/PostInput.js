@@ -2,15 +2,21 @@ import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternate
 import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
 
 import styles from "./postInput.module.css";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { DataContext } from "../../Context/DataContext";
 import dayjs from "dayjs";
 import { CustomLoader } from "../CustomLoader/CustomLoader";
 
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+
 const PostInput = ({ isEdit, postInfo, setModal }) => {
   const { state, dispatch, customToast, loader } = useContext(DataContext);
+  const [showEmojis, setShowEmojis] = useState(false);
   const { userToken, user } = useContext(AuthContext);
+
+  const emojiPickerRef = useRef(null);
 
   useEffect(() => {
     if (isEdit) {
@@ -18,13 +24,19 @@ const PostInput = ({ isEdit, postInfo, setModal }) => {
     }
   }, []);
 
-  // console.log("postId", postId);
-
   const [postContent, setPostContent] = useState({
     text: {
       value: "",
     },
   });
+
+  const addEmoji = (e) => {
+    let sym = e.unified.split("-");
+    let codesArray = [];
+    sym.forEach((el) => codesArray.push("0x" + el));
+    let emoji = String.fromCodePoint(...codesArray);
+    setPostContent((postContent) => ({ ...postContent, text: { ...postContent.text, value: postContent.text.value + emoji } }));
+  };
 
   const onChangeText = (value) => {
     setPostContent((postContent) => ({ ...postContent, text: { ...postContent.text, value: value } }));
@@ -63,8 +75,13 @@ const PostInput = ({ isEdit, postInfo, setModal }) => {
       <textarea placeholder="What is happening?" value={postContent.text.value} onChange={(e) => onChangeText(e.target.value)}></textarea>
       <div className={styles.uploadOptions}>
         <div className={styles.photoContainer}>
-          <AddPhotoAlternateOutlinedIcon className={styles.addPhoto} />
-          <EmojiEmotionsOutlinedIcon className={styles.emoji} />
+          {/* <AddPhotoAlternateOutlinedIcon className={styles.addPhoto} /> */}
+          <EmojiEmotionsOutlinedIcon className={styles.emoji} onClick={() => setShowEmojis((showEmojis) => !showEmojis)} />
+          {showEmojis && (
+            <div className={styles.pickerContainer} ref={emojiPickerRef}>
+              <Picker data={data} onEmojiSelect={addEmoji} />
+            </div>
+          )}
         </div>
         <div className={styles.postButton}>
           <button

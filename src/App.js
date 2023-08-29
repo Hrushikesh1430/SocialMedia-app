@@ -103,28 +103,22 @@ function App() {
       <ToastContainer toastStyle={{ backgroundColor: "#fb5d5d;" }} />
       {/* <Loader /> */}
       <Routes>
-        <Route path="/mockman" element={<Mockman />} />
+        <Route path="/" element={<ProtectedRoutes component={<Home />} redirect={"login"} />} />
+        <Route path="/home" element={<ProtectedRoutes component={<Home />} redirect={"login"} />} />
+
+        <Route path="/bookmarks" element={<ProtectedRoutes component={<BookMarks />} redirect={"login"} />} />
+        <Route path="/explore" element={<ProtectedRoutes component={<Explore />} redirect={"login"} />} />
+        <Route path="/liked" element={<ProtectedRoutes component={<Liked />} redirect={"login"} />} />
+        <Route path="/profile" element={<ProtectedRoutes component={<Profile />} redirect={"login"} />} />
+        <Route path="/profile/:username" element={<ProtectedRoutes component={<Profile />} redirect={"login"} />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/bookmarks" element={<BookMarks />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/liked" element={<Liked />} />
-        <Route path="/profile" element={<Profile />} />
 
-        <Route path="/profile/:username" element={<Profile />} />
-
-        <Route path="/following" element={<FollowInfo />} />
-        <Route path="/followers" element={<FollowInfo />} />
-
-        {/* <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} /> */}
-
-        {/* <Route path="/product/:productId" element={<Product />} /> */}
-        {/* <Route path="/wishlist" element={<ProtectedRoutes component={<WishList />} redirect={"login"} />} /> */}
-
-        {/* <Route path="*" element={<Products />} /> */}
+        <Route path="*" element={<Login />} />
+        {/* <Route path="/mockman" element={<Mockman />} /> */}
+        {/* <Route path="/following" element={<FollowInfo />} />
+        <Route path="/followers" element={<FollowInfo />} /> */}
       </Routes>
     </div>
   );
