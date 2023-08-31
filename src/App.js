@@ -100,8 +100,7 @@ function App() {
   return (
     <div className="App">
       <ScrollToTop />
-      <ToastContainer toastStyle={{ backgroundColor: "#fb5d5d;" }} />
-      {/* <Loader /> */}
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<ProtectedRoutes component={<Home />} redirect={"login"} />} />
         <Route path="/home" element={<ProtectedRoutes component={<Home />} redirect={"login"} />} />

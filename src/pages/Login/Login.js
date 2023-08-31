@@ -93,8 +93,24 @@ const Login = () => {
 
   // const addUser = ()
 
-  const submitLoginHandler = async (e) => {
+  const submitLoginHandler = async (e, type = "user") => {
     e.preventDefault();
+
+    if (type === "guest") {
+      setFormValues((formValues) => ({
+        ...formValues,
+        password: {
+          ...formValues.username,
+          error: "",
+          value: "12345",
+        },
+        username: {
+          ...formValues.username,
+          error: "",
+          value: "skullbjoing",
+        },
+      }));
+    }
     let validationError = false;
     const { username, password } = formValues;
 
@@ -112,10 +128,10 @@ const Login = () => {
       }
       return validationError;
     };
-    if (!errorFor(validationError)) {
+    if (!errorFor(validationError) || type === "guest") {
       const data = {
-        username: username.value,
-        password: password.value,
+        username: type === "guest" ? "skullbjoing" : username.value,
+        password: type === "guest" ? "12345" : password.value,
       };
 
       const url = "/api/auth/login";
@@ -207,6 +223,7 @@ const Login = () => {
                       }));
                       errorCheck("username", e.target.value);
                     }}
+                    value={formValues.username.value}
                     placeholder="Phone,email or Username"
                   />
                   {formValues.username.error !== "" && <span className={styles.warning}>{formValues.username.error}</span>}
@@ -226,6 +243,7 @@ const Login = () => {
                       errorCheck("password", e.target.value);
                     }}
                     placeholder="Password"
+                    value={formValues.password.value}
                   />
                   <RemoveRedEyeOutlinedIcon className={styles.eye} onClick={() => changeVisibility()} />
                 </div>
@@ -235,12 +253,21 @@ const Login = () => {
               <button type="submit" className={styles.signIn}>
                 Sign in
               </button>
+
               <div className={styles.orTextWrapper}>
                 <div className={styles.line}></div>
                 <span className={styles.orText}>or</span>
                 <div className={styles.line}></div>
               </div>
             </form>
+          </div>
+          <button className={styles.guest} onClick={(e) => submitLoginHandler(e, "guest")}>
+            Guest Login
+          </button>
+          <div className={styles.orTextWrapper}>
+            <div className={styles.line}></div>
+            <span className={styles.orText}>or</span>
+            <div className={styles.line}></div>
           </div>
           <button className={styles.create} onClick={() => navigate("/signup")}>
             Create Account
