@@ -18,7 +18,7 @@ const UserFollow = ({ firstName, lastName, username, avatarURL, followers, follo
       console.log(data);
     } catch (e) {
     } finally {
-      // HideLoader();
+      setLoading(false);
     }
   };
   const followHandler = async (id, username) => {
@@ -40,7 +40,6 @@ const UserFollow = ({ firstName, lastName, username, avatarURL, followers, follo
       followStatus ? customToast(`Unfollowed ${username}`, "SUCCESS") : customToast(`Followed ${username}`, "SUCCESS");
     } catch (e) {
     } finally {
-      setLoading(false);
     }
   };
   return (
