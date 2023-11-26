@@ -32,18 +32,6 @@ export const users = [
   },
   {
     _id: uuid(),
-    firstName: "Subha",
-    lastName: "Sasmal",
-    username: "sassy",
-    password: "always@15",
-    avatarURL: "https://res.cloudinary.com/dtrjdcrme/image/upload/v1651554256/socialmedia/avatars/jane-doe_il3cvx.webp",
-    bio: "I am Subha",
-    profileURL: "",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
-  },
-  {
-    _id: uuid(),
     firstName: "Parth",
     lastName: "Patel",
     username: "parthesh",
