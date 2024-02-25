@@ -66,6 +66,7 @@
   align-items: center;
   margin-top: auto;
   margin-bottom: 30px;
+  cursor: pointer;
 }
 .userImage img {
   width: 35px;
